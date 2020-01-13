@@ -12,3 +12,39 @@ const config = {
     messagingSenderId: "502140250227",
     appId: "1:502140250227:web:79b86f2bfc522034eaa206"
 }
+
+class Firebase{
+
+    constructor(){
+        firebase.initializeApp(config);
+        this.auth = firebase.auth();
+        this.db = firebase.firestore();
+    }
+
+    // login
+    async login(email, password){
+        const user = await firebase.auth().signInWithEmailAndPassword(email, password).catch(err =>{
+            console.log(err);
+            return err;
+        });
+        return user;
+    }
+    // signin
+    async signin(email, password){
+        const user = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(err => {
+            console.log(err);
+            return err;
+        });
+        return user;
+    }
+    // logout
+    async logout(){
+        const logout = await firebase.auth().signOut().catch(err => {
+            console.log(err);
+            return err;
+        });
+        return logout;
+    }
+}
+
+export default new Firebase();
