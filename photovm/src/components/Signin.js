@@ -20,7 +20,7 @@ const Signin = () => {
             return dispatch({
                 type: 'SIGNIN',
                 payload:response
-            })
+            });
         }
      
     }
