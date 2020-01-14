@@ -9,9 +9,20 @@ const Signin = () => {
 
     const {state, dispatch} = React.useContext(Auth);
 
-    const signin = (e) => {
+    const signin = async(e) => {
         e.preventDefault();
-        console.log("Form sent");
+        
+        let response = await firebase.signin(email, password);
+        if(response.hasOwnProperty('message')){
+            console.log(response.message);
+        }else{
+            console.log(response.user);
+            return dispatch({
+                type: 'SIGNIN',
+                payload:response
+            })
+        }
+     
     }
 
     return (
