@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import firebase from '../firebase/config';
 import { Auth } from '../context/authContext';
+import {Redirect} from 'react-router-dom';
 
 const Signin = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
+    const [routeRedirect, setRouteRedirect] = useState(false);
     const {state, dispatch} = React.useContext(Auth);
 
     const signin = async(e) => {
@@ -17,12 +18,18 @@ const Signin = () => {
             console.log(response.message);
         }else{
             console.log(response.user);
+            setRouteRedirect(true);
             return dispatch({
                 type: 'SIGNIN',
                 payload:response
             });
         }
      
+    }
+
+    const redirect = routeRedirect;
+    if(redirect){
+        return <Redirect to='/' />
     }
 
     return (

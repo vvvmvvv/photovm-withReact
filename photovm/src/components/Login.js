@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Redirect, withRouter} from 'react-router-dom';
+import {Redirect} from 'react-router-dom';
 import firebase from '../firebase/config';
 import { Auth } from '../context/authContext';
 
@@ -17,7 +17,8 @@ const Login = () => {
         if(response.hasOwnProperty('message')){
             console.log(response.message);
         }else{
-            console.log(response.user)
+            //console.log(response.user)
+            setRouteRedirect(true);
             return dispatch({
                 type: 'LOGIN',
                 payload: response.user
@@ -34,7 +35,7 @@ const Login = () => {
     return (
         <React.Fragment>
             <form onSubmit={login}>
-                <p>Login</p>
+                <p>Login:</p>
 
                 <label htmlFor='email'>Email: </label>
                 <input type='email' name='email' onChange= {(e) => setEmail(e.target.value)} />
