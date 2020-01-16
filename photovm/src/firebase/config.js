@@ -52,6 +52,27 @@ class Firebase{
         });
     }
 
+    // fetching photos
+
+    async getPhotos(){
+        let photosArray = [];
+        const photos = await firebase.firestore().collection('Photos').get();
+        photos.forEach(doc => {
+            photosArray.push({id:doc.id, data: doc.data()});
+        });
+        return photosArray;
+    }
+
+    async getPhoto(photoid){
+        const photo = await firebase.firestore().collection('Photos').doc(photoid).get();
+        const photoData = photo.data();
+        return photoData;
+    }
+
+
+
+
+
     async createPhoto(photo){
         //console.log(photo);
         const storageRef = firebase.storage().ref();

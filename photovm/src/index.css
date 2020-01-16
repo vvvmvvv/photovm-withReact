@@ -1,5 +1,36 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+.photos{
+  padding-top: 30px;
+  padding-bottom: 80px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
+
+.photo{
+  width: 350px;
+  min-width: 300px;
+  position: relative;
+}
+
+.photo > a div{
+  display: block;
+  height: 350px;
+  background-position: center !important;
+  background-size: 200%;
+}
+
+.photo:hover > a div {
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-color: red;
+}
+
+.photo > p {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  text-align: right;
+}
+

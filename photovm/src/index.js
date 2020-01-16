@@ -4,7 +4,7 @@ import App from './App';
 import './index.css';
 import {AuthProvider} from './context/authContext';
 import {BrowserRouter} from 'react-router-dom';
-
+import {PhotosProvider} from './context/photosContext'
 
 
 
@@ -12,7 +12,9 @@ import {BrowserRouter} from 'react-router-dom';
 ReactDOM.render(
     <BrowserRouter>
           <AuthProvider>
-            <App />
+            <PhotosProvider>
+              <App />
+            </PhotosProvider>
           </AuthProvider>  
     </BrowserRouter>
   ,
