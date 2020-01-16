@@ -51,6 +51,28 @@ class Firebase{
             this.auth.onAuthStateChanged(resolve);
         });
     }
+
+    async createPhoto(photo){
+        //console.log(photo);
+        const storageRef = firebase.storage().ref();
+        const storageChild = storageRef.child(photo.photography.name);
+        const photoPhotography = await storageChild.put(photo.photography); //upload    
+        const downloadUrl = await storageChild.getDownloadURL();    // download
+        const fileRef = photoPhotography.ref.location.path;
+
+        let newPhoto = {
+            title: photo.title,
+            description: photo.description,
+            photography: downloadUrl,
+            fileref: fileRef
+        }
+
+        const firestorePhoto = await firebase.firestore().collection('Photos').add(newPhoto).catch(err => {
+            console.log(err);
+            return err;
+        });
+        return firestorePhoto;
+    }
 }
 
 export default new Firebase();
