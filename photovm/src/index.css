@@ -1,3 +1,96 @@
+html{
+  height: 100%;
+  min-width: 100%;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  background: white;
+}
+body *{
+  transition: background-size 1s ease-in-out;
+}
+
+header{
+  height: 500px;
+  position: relative;
+  background: url("https://images.unsplash.com/photo-1507247174579-ae7086d18512?ixlib=rb-1.2.1&auto=format&fit=crop&w=1299&q=80") center;
+  background-size: 100%;
+}
+header div {
+  margin-left: 10%;
+  width: 60%;
+}
+header div h1 {
+  font-size: 3rem;
+  line-height: 3rem;
+  margin: 0px;
+  padding-top: 70px;
+  color: white;
+}
+header div .textHeader{
+  font-size: 2rem;
+  line-height: 2rem;
+  margin: 0px;
+  padding-top: 10px;
+  color: white;
+
+}
+
+header div p {
+  width: 40%;
+}
+.processing{
+  width: 40%;
+  max-width: 120px auto;
+  text-align: center;
+}
+
+nav{
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  background: white;
+  justify-content: space-between;
+  color: black;
+}
+nav ul {
+  list-style: none;
+  padding: 0px 10px;
+  margin: 10px 0px;
+}
+
+nav ul li a {
+  text-decoration: none;
+  color: black;
+  text-transform: uppercase;
+}
+nav ul li {
+  display: inline-block;
+  margin-left: 10px;
+
+}
+nav ul:first-of-type li:first-of-type{
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .photos{
   padding-top: 30px;
   padding-bottom: 80px;
@@ -22,8 +115,6 @@
 
 .photo:hover > a div {
   background-size: 100%;
-  background-repeat: no-repeat;
-  background-color: red;
 }
 
 .photo > p {

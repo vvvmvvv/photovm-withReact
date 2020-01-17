@@ -94,6 +94,14 @@ class Firebase{
         });
         return firestorePhoto;
     }
+
+     updatePhoto(photoid, photoData){
+        console.log(photoid, photoData);
+    }
+
+    deletePhoto(photoid, fileref){
+        console.log(photoid, fileref);
+    }
 }
 
 export default new Firebase();

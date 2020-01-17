@@ -37,7 +37,8 @@ const Main = () => {
         <React.Fragment>
             <header>
                 <div>
-                <h1> -Internet photo album, photo sharing service- </h1>
+                <h1>&nbsp;&gt;&nbsp;Internet photo album </h1>
+                 <div className="textHeader">photo sharing service</div>
                 </div>
 
             </header>
