@@ -72,12 +72,17 @@ const Photo = (props) => {
     }
 
     const deleteCurrentPhoto = () => {
-        // delete photo
+        firebase.deletePhoto(photoid, photo.fileref)
+        .then(() => {
+            setRedirect(true);
+        }).catch(err => {
+            console.log(err);
+        })
     }
 
     let updateForm;
     if(editMode){
-        deleteButton = <button className="delete" onClick={(e) => deleteCurrentPhoto() }>Delete Photo</button>
+        deleteButton = <button className="delete" onClick={(e) => deleteCurrentPhoto()}>Delete Photo</button>
 
         if(isBusy){
             updateForm = (

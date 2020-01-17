@@ -99,8 +99,19 @@ class Firebase{
         console.log(photoid, photoData);
     }
 
-    deletePhoto(photoid, fileref){
-        console.log(photoid, fileref);
+    async deletePhoto(photoid, fileref){
+        const storageRef = firebase.storage().ref();
+        await storageRef.child(fileref).delete().catch(err => {
+            console.log(err);
+        });
+        console.log("Image Deleted");
+        const photo = await firebase.firestore().collection("Photos").doc(photoid).delete().catch(err => {
+            console.log(err);
+        });
+        console.log("Photo Deleted");
+
+        return photo;
+
     }
 }
 
