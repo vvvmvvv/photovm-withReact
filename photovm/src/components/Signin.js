@@ -35,14 +35,14 @@ const Signin = () => {
     return (
         <React.Fragment>
             <form onSubmit={signin}>
-                <p>Create an Account:</p>
+                <p>&nbsp;&gt;&nbsp;Create an Account&nbsp;&lt;&nbsp;</p>
 
                 <label htmlFor='email'>Email: </label>
                 <input type='email' name='email' onChange= {(e) => setEmail(e.target.value)} />
 
                 <label htmlFor='password'>Password: </label>
                 <input type='password' name='password' onChange= { (e) => setPassword(e.target.value) } />
-
+                <hr/>
                 <input type='submit' value="Create account"/>
 
             </form>

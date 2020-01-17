@@ -77,7 +77,7 @@ const Photo = (props) => {
 
     let updateForm;
     if(editMode){
-        deleteButton = <button className="delete" onclick={(e) => deleteCurrentPhoto() }>Delete Photo</button>
+        deleteButton = <button className="delete" onClick={(e) => deleteCurrentPhoto() }>Delete Photo</button>
 
         if(isBusy){
             updateForm = (
@@ -90,17 +90,17 @@ const Photo = (props) => {
             updateForm = (
                 <React.Fragment>
                 <form className='editForm' onSubmit={updateCurrentPhoto}>
-                        <p>Update the current photo:</p>
+                        <p>&nbsp;&gt;&nbsp;Update the current photo&nbsp;&lt;&nbsp;</p>
 
                             <label htmlFor="title">Photo title:</label>
                             <input type="text" name="title" ref={titleRef}  defaultValue={photo.title} />
 
                             <label htmlFor="description">Photo description:</label>
                             <textarea name="description" ref={descriptionRef}  defaultValue={photo.description}></textarea>
-
+                            
                             <label htmlFor="photography">Change photography:</label>
                             <input type="file" ref={fileRef}/>
-
+                            <hr/>
                             <input type="submit" value="Update photo"/>
                 </form>
             

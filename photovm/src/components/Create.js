@@ -46,7 +46,7 @@ const Create = (props) =>{
     }else{
         createForm = (
             <form onSubmit={addPhoto}>
-                <p>Add a new photo:</p>
+                <p>&nbsp;&gt;&nbsp;Add a new photo&nbsp;&lt;&nbsp;</p>
 
                 <label htmlFor="title">Photo title:</label>
                 <input type="text" name="title" onChange={(e) => setTitle(e.target.value)}/>
@@ -56,7 +56,7 @@ const Create = (props) =>{
 
                 <label htmlFor="photography">Choose photo:</label>
                 <input type="file" onChange={(e) => setPhotography(e.target.files)}/>
-
+                <hr/>
                 <input type="submit" value="Add photo"/>
 
             </form>
