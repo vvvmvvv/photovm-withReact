@@ -58,11 +58,23 @@ const Photo = (props) => {
         e.preventDefault();
         setIsBusy(true);
 
-        //create the obj
-        //updatePhoto
+        const _photo = {
+            title: titleRef.current.value,
+            description: descriptionRef.current.value
+        }
 
-        setIsBusy(false);
-        setRedirect(true);
+        if(fileRef.current.files.length > 0){
+            _photo['photography'] = fileRef.current.files[0];
+            _photo['oldphotography'] = photo.fileref;
+        }
+
+        firebase.updatePhoto(photoid, _photo).then(() => {
+            console.log("Photo Updated");
+            setIsBusy(false);
+            setRedirect(true);
+        }).catch(err => {
+            console.log(err);
+        });
 
     }
 

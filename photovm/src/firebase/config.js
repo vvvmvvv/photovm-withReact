@@ -95,15 +95,43 @@ class Firebase{
         return firestorePhoto;
     }
 
-     updatePhoto(photoid, photoData){
-        console.log(photoid, photoData);
+     async updatePhoto(photoid, photoData){
+        if(photoData['photography']){
+
+        const storageRef = firebase.storage().ref();
+        const storageChild = storageRef.child(photoData.photography.name);
+        const photoPhotography = await storageChild.put(photoData.photography); //upload    
+        const downloadUrl = await storageChild.getDownloadURL();    // download
+        const fileRef = photoPhotography.ref.location.path;
+
+        await storageRef.child(photoData['oldphotography']).delete().catch(err => {
+            console.log(err);
+        })
+
+        let updatedPhoto = {
+            title: photoData.title,
+            description: photoData.description,
+            photography: downloadUrl,
+            fileRef: fileRef
+        }
+
+        const photo = await firebase.firestore().collection('Photos').doc(photoid).set(updatedPhoto, {merge: true}).catch(err => {
+            console.log(err);
+        });
+        return photo;
+    }else{
+        const photo = await firebase.firestore().collection('Photos').doc(photoid).set(photoData, {merge: true}).catch(err => {
+            console.log(err);
+        });
+        return photo;
     }
+}
 
     async deletePhoto(photoid, fileref){
         const storageRef = firebase.storage().ref();
         await storageRef.child(fileref).delete().catch(err => {
             console.log(err);
-        });
+        }); 
         console.log("Image Deleted");
         const photo = await firebase.firestore().collection("Photos").doc(photoid).delete().catch(err => {
             console.log(err);
