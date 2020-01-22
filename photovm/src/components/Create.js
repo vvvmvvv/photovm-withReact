@@ -9,26 +9,64 @@ const Create = (props) =>{
     const [photography, setPhotography] = useState('');
     const [isBusy, setIsBusy] = useState(false);
     const [routeRedirect, setRedirect] = useState(false);
-    
+    const [loading, setLoading] = useState('');
+
+
+
+
     const addPhoto = async(e) => {
         e.preventDefault();
         setIsBusy(true);
 
+        let d;
         let photo = {
             title,
             description,
             photography: photography[0]
         }
-        
-        await firebase.createPhoto(photo).then(() => {
-            console.log("photo created successfully");
+
+        const storageRef = firebase.storage.ref();
+        const storageChild = storageRef.child(photo.photography.name);
+        const photoPhotography = storageChild.put(photo.photography);
+
+
+        await new Promise(resolve => {
+            photoPhotography.on("state_changed", (snapshot) => {
+                let progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                setLoading(Math.trunc(progress));
+            },(error) =>{
+                // error
+                console.log(error);
+            }, async() => {
+                //completed
+                const downloadUrl = await storageChild.getDownloadURL();
+                d = downloadUrl;
+                console.log(d);
+                resolve();
+            });
+        });
+
+        firebase.createPhoto(d, photo).then((photo) => {
+            console.log(photo);
             setIsBusy(false);
             setRedirect(true);
         }).catch(err => {
             console.log(err);
             setIsBusy(false);
-        })
+            
+        });
     }
+
+
+
+
+    useEffect(() => {
+        firebase.getUserState().then(user => {
+            if(!user){
+                props.history.replace('/login');
+            }
+        })
+    });
 
     const redirect = routeRedirect;
     if(redirect){
@@ -39,7 +77,7 @@ const Create = (props) =>{
     if(isBusy){
         createForm = (
                     <div className="processing">
-                        <p>Request in procces</p>
+                        <p>Request in procces <span className="process">{loading}%</span></p>
                         <div className="loader">Loading...</div>
                     </div>
         )
@@ -68,4 +106,4 @@ const Create = (props) =>{
         </React.Fragment>
     )
 }
-export default Create;
+export default withRouter(Create);

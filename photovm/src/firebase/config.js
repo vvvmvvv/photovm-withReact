@@ -19,6 +19,7 @@ class Firebase{
         firebase.initializeApp(config);
         this.auth = firebase.auth();
         this.db = firebase.firestore();
+        this.storage = firebase.storage();
     }
 
     // login
@@ -72,20 +73,14 @@ class Firebase{
 
 
 
-
-    async createPhoto(photo){
-        //console.log(photo);
-        const storageRef = firebase.storage().ref();
-        const storageChild = storageRef.child(photo.photography.name);
-        const photoPhotography = await storageChild.put(photo.photography); //upload    
-        const downloadUrl = await storageChild.getDownloadURL();    // download
-        const fileRef = photoPhotography.ref.location.path;
+    async createPhoto(url,photo){
+        const fileRef = await firebase.storage().refFromURL(url);
 
         let newPhoto = {
             title: photo.title,
             description: photo.description,
-            photography: downloadUrl,
-            fileref: fileRef
+            photography: url,
+            fileref: fileRef.location.path
         }
 
         const firestorePhoto = await firebase.firestore().collection('Photos').add(newPhoto).catch(err => {
@@ -95,24 +90,24 @@ class Firebase{
         return firestorePhoto;
     }
 
-     async updatePhoto(photoid, photoData){
+    
+
+     async updatePhoto(url, photoid, photoData){
         if(photoData['photography']){
+        
 
-        const storageRef = firebase.storage().ref();
-        const storageChild = storageRef.child(photoData.photography.name);
-        const photoPhotography = await storageChild.put(photoData.photography); //upload    
-        const downloadUrl = await storageChild.getDownloadURL();    // download
-        const fileRef = photoPhotography.ref.location.path;
+        const fileRef = await firebase.storage().refFromURL(url);
 
-        await storageRef.child(photoData['oldphotography']).delete().catch(err => {
+
+        await this.storage.ref().child(photoData['oldphotography']).delete().catch(err => {
             console.log(err);
-        })
+        });
 
         let updatedPhoto = {
             title: photoData.title,
             description: photoData.description,
-            photography: downloadUrl,
-            fileRef: fileRef
+            photography: url,
+            fileRef: fileRef.location.path
         }
 
         const photo = await firebase.firestore().collection('Photos').doc(photoid).set(updatedPhoto, {merge: true}).catch(err => {

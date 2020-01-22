@@ -50,6 +50,7 @@ const Main = () => {
                             <Link to={'photo/' + photo.id}>
                                 <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
                             </Link>
+                            
                             </div>
                     )
                 })}

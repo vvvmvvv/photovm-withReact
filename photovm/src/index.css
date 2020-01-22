@@ -123,6 +123,12 @@ nav ul:first-of-type li:first-of-type{
 .single > img {
   width: 100%;
 }
+.process {
+  display: block;
+  color: deepskyblue;
+  font-size: 3rem;
+
+}
 
 form {
   width: 60%;
@@ -138,10 +144,10 @@ form * {
   display: block;
 }
 
-input,textarea{
+/* input,textarea{
   background-color: whitesmoke;
   color: black; 
-}
+} */
 .editForm{
   width: 100%;
 }
