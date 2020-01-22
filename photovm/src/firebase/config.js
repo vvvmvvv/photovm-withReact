@@ -90,7 +90,7 @@ class Firebase{
         return firestorePhoto;
     }
 
-    
+
 
      async updatePhoto(url, photoid, photoData){
         if(photoData['photography']){
@@ -135,6 +135,83 @@ class Firebase{
 
         return photo;
 
+    }
+
+    //----------------------------------Pagination
+
+
+    async getPhotosPage(){
+        const LIMIT = 8;
+        const photosArray = [];
+
+        const firstPage = firebase.firestore().collection('Photos').orderBy('title').limit(LIMIT);
+        let currentPage = firstPage;
+        let currentPageNumber = 1;
+
+        const photos = await currentPage.get();
+        photos.forEach(doc => {
+            photosArray.push({id:doc.id, data: doc.data()});
+        });
+
+        async function nextPage() {
+            const photosArray = [];
+            
+            const snapshot = await currentPage.get()
+            const last = snapshot.docs[snapshot.docs.length - 1];
+
+            const next = firebase.firestore().collection('Photos')
+                .orderBy('title')
+                .startAfter(last.data().title)
+                .limit(LIMIT);
+
+            const photos = await next.get();
+            photos.forEach(doc => {
+                photosArray.push({id:doc.id, data: doc.data()});
+            });
+            
+            currentPage = next;
+            currentPageNumber++;
+            return photosArray;
+        }
+
+        async function prevPage() {
+            const photosArray = [];
+            if (currentPageNumber === 1) {
+                const photos = await firstPage.get();
+                photos.forEach(doc => {
+                    photosArray.push({id:doc.id, data: doc.data()});
+                });
+                return photosArray;
+            }
+
+            const snapshot = await currentPage.get()
+            const last = snapshot.docs[snapshot.docs.length - 1];
+
+            const prev = firebase.firestore().collection('Photos')
+                .orderBy('title')
+                .endBefore(last.data().title)
+                .limitToLast(LIMIT);
+
+            const photos = await prev.get();
+            photos.forEach(doc => {
+                photosArray.push({id:doc.id, data: doc.data()});
+            });
+            
+            currentPage = prev;
+            currentPageNumber--;
+            return photosArray;
+        }
+
+        return {
+            photosArray,
+            nextPage,
+            prevPage
+        };
+    }
+
+    async getPhotosCount(){
+        const photos = await firebase.firestore().collection('Photos').get();
+        return photos.docs.length;
     }
 }
 

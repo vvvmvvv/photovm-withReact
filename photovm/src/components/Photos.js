@@ -1,54 +1,39 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
-import firebase from '../firebase/config';
+import Pagination from './Pagination';
 
 import {Photos} from '../context/photosContext';
 
 const AllPhotos = () => {
 
-    const{state, dispatch} = React.useContext(Photos);
-
-    const getPhotos = async() => {
-        //let _photos = [];
-        const photosArray = await firebase.getPhotos().catch(err => {
-            console.log(err);
-            return err;
-        });
-
-        /*
-        photosArray.forEach(doc => {
-            _photos.push({id:doc.id, data:doc.data});
-            
-        });
-        */
-
-        return dispatch({
-            type: 'FETCH_PHOTOS',
-            payload: photosArray
-        });
-    }
-
+    const{state} = React.useContext(Photos);
+    const [loading, setLoading] = React.useState(false)
 
     useEffect(() => {
-        getPhotos();
-    },[])
+        console.log('hi');
+        if (state.photos) {
+            setLoading(true);
+        }
+    }, [state.photos]);
 
     return (
         <React.Fragment>
             <h1> Photos gallery</h1>
 
+
             <div className='photos'>
-                {state.photos.map(photo =>{
-                    return(
-                        <div className='photo' key={photo.id}>
-                            <Link to={'photos/' + photo.id}>
-                                <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
-                            </Link>
-                            
+                {loading 
+                    ? state.photos.map(photo =>{
+                        return(
+                            <div className='photo' key={photo.id}>
+                                <Link to={'photos/' + photo.id}>
+                                    <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
+                                </Link> 
                             </div>
-                    )
-                })}
+                        )
+                }) : (<p>Loading...</p>)}
             </div>
+            <Pagination></Pagination>
             
         </React.Fragment>
     );

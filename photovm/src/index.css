@@ -77,6 +77,10 @@ nav ul:first-of-type li:first-of-type{
   font-size: 1.1rem;
 }
 
+.pagination {
+  display: flex;
+  flex-direction: row;
+}
 
 .photos{
   padding-top: 30px;

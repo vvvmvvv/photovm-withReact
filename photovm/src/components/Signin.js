@@ -8,7 +8,7 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [routeRedirect, setRouteRedirect] = useState(false);
-    const {state, dispatch} = React.useContext(Auth);
+    const {dispatch} = React.useContext(Auth);
 
     const signin = async(e) => {
         e.preventDefault();
@@ -38,10 +38,10 @@ const Signin = () => {
                 <p>&nbsp;&gt;&nbsp;Create an Account&nbsp;&lt;&nbsp;</p>
 
                 <label htmlFor='email'>Email: </label>
-                <input type='email' name='email' onChange= {(e) => setEmail(e.target.value)} />
+                <input type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
 
                 <label htmlFor='password'>Password: </label>
-                <input type='password' name='password' onChange= { (e) => setPassword(e.target.value) } />
+                <input type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <input type='submit' value="Create account"/>
 
