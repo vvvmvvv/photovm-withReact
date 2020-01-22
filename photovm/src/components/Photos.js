@@ -4,7 +4,7 @@ import firebase from '../firebase/config';
 
 import {Photos} from '../context/photosContext';
 
-const Main = () => {
+const AllPhotos = () => {
 
     const{state, dispatch} = React.useContext(Photos);
 
@@ -35,16 +35,23 @@ const Main = () => {
 
     return (
         <React.Fragment>
-            <header>
-                <div>
-                <h1>&nbsp;&gt;&nbsp;Internet photo album </h1>
-                 <div className="textHeader">photo sharing service</div>
-                </div>
+            <h1> Photos gallery</h1>
 
-            </header>
+            <div className='photos'>
+                {state.photos.map(photo =>{
+                    return(
+                        <div className='photo' key={photo.id}>
+                            <Link to={'photos/' + photo.id}>
+                                <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
+                            </Link>
+                            
+                            </div>
+                    )
+                })}
+            </div>
             
         </React.Fragment>
     );
 }
 
-export default Main;
+export default AllPhotos;

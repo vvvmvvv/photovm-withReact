@@ -57,6 +57,7 @@ const Nav = (props) => {
             </ul>
 
             <ul>
+                <li><Link to='/photos'> Gallery </Link></li>
                 <li><Link to='/create'> Add new Photo </Link></li>
                 {buttons}
             </ul>
