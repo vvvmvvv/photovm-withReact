@@ -78,8 +78,14 @@ nav ul:first-of-type li:first-of-type{
 }
 
 .pagination {
+  justify-content: center;
   display: flex;
   flex-direction: row;
+  margin-bottom: 50px;
+}
+
+.pagination__carat {
+  margin: 0 10px;
 }
 
 .photos{
@@ -127,6 +133,7 @@ nav ul:first-of-type li:first-of-type{
 .single > img {
   width: 100%;
 }
+
 .process {
   display: block;
   color: deepskyblue;
@@ -138,7 +145,6 @@ form {
   width: 60%;
   margin: 0 auto;
   max-width: 900px;
-  
 }
 
 form * {
@@ -148,10 +154,6 @@ form * {
   display: block;
 }
 
-/* input,textarea{
-  background-color: whitesmoke;
-  color: black; 
-} */
 .editForm{
   width: 100%;
 }

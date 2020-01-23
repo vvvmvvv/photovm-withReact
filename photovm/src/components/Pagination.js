@@ -35,15 +35,10 @@ const Pagination = () => {
     const getPhotosCount = async () => {
         const PHOTOS_PER_PAGE = 8;
         const photosCount = await firebase.getPhotosCount();
-        console.log(photosCount);
         setPageCount(Math.ceil(photosCount / PHOTOS_PER_PAGE));
     }
 
     const prevPageHandler = async () => {
-        if (page === FIRST_PAGE) {
-            return;
-        }
-
         setPage(page - 1);
 
         const photosArray = await prevPage();
@@ -52,10 +47,6 @@ const Pagination = () => {
     }
 
     const nextPageHandler = async () => {
-        if (page >= pageCount) {
-            return;
-        }
-
         setPage(page + 1);
 
         const photosArray = await nextPage();
@@ -68,12 +59,24 @@ const Pagination = () => {
         getPhotosCount();
     },[]);
 
+    const isCaratDisabled = (caratType) => {
+        if (caratType === 'left' && page === FIRST_PAGE) {
+            return true;
+        }
+
+        if (caratType === 'right' && page >= pageCount) {
+            return true;
+        }
+
+        return false;
+    }
+
     return (
         <React.Fragment>
             <div className="pagination">
-                <button onClick={prevPageHandler} className="pagination__carat">{'<'}</button>
-                <p>Page {page} of 10</p>
-                <button onClick={nextPageHandler} className="pagination__carat">{'>'}</button>
+                <button onClick={prevPageHandler} disabled={isCaratDisabled('left')} className="pagination__carat">{'<'}</button>
+                <p>Page {page} of {pageCount}</p>
+                <button onClick={nextPageHandler} disabled={isCaratDisabled('right')} className="pagination__carat">{'>'}</button>
             </div>
         </React.Fragment>
     );

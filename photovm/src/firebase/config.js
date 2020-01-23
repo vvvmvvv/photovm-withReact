@@ -145,18 +145,21 @@ class Firebase{
         const photosArray = [];
 
         const firstPage = firebase.firestore().collection('Photos').orderBy('title').limit(LIMIT);
-        let currentPage = firstPage;
-        let currentPageNumber = 1;
+        const pageInfo = {
+            currentPage: firstPage,
+            currentPageNumber: 1
+        };
 
-        const photos = await currentPage.get();
+        const photos = await pageInfo.currentPage.get();
         photos.forEach(doc => {
             photosArray.push({id:doc.id, data: doc.data()});
         });
 
         async function nextPage() {
             const photosArray = [];
-            
-            const snapshot = await currentPage.get()
+            pageInfo.currentPageNumber++;
+
+            const snapshot = await pageInfo.currentPage.get()
             const last = snapshot.docs[snapshot.docs.length - 1];
 
             const next = firebase.firestore().collection('Photos')
@@ -169,23 +172,25 @@ class Firebase{
                 photosArray.push({id:doc.id, data: doc.data()});
             });
             
-            currentPage = next;
-            currentPageNumber++;
+            pageInfo.currentPage = next;
             return photosArray;
         }
 
         async function prevPage() {
             const photosArray = [];
-            if (currentPageNumber === 1) {
+            pageInfo.currentPageNumber--;
+
+            if (pageInfo.currentPageNumber === 1) {
                 const photos = await firstPage.get();
                 photos.forEach(doc => {
                     photosArray.push({id:doc.id, data: doc.data()});
                 });
+                pageInfo.currentPage = firstPage;
                 return photosArray;
             }
 
-            const snapshot = await currentPage.get()
-            const last = snapshot.docs[snapshot.docs.length - 1];
+            const snapshot = await pageInfo.currentPage.get()
+            const last = snapshot.docs[snapshot.docs.length - 2];
 
             const prev = firebase.firestore().collection('Photos')
                 .orderBy('title')
@@ -197,8 +202,7 @@ class Firebase{
                 photosArray.push({id:doc.id, data: doc.data()});
             });
             
-            currentPage = prev;
-            currentPageNumber--;
+            pageInfo.currentPage = prev;
             return photosArray;
         }
 
