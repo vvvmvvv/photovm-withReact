@@ -5,59 +5,67 @@ import {Photos} from '../context/photosContext';
 
 const Pagination = () => {
     const FIRST_PAGE = 1;
+    const PHOTOS_PER_PAGE = 2;
 
     const {dispatch} = React.useContext(Photos);
     const [page, setPage] = React.useState(FIRST_PAGE);
-    const [nextPage, setNextPage] = React.useState();
-    const [prevPage, setPrevPage] = React.useState();
-    const [pageCount, setPageCount] = React.useState(1);
+    const [pageCount, setPageCount] = React.useState(0);
+    const [allPhotos, setAllPhotos] = React.useState([]);
+    const [isLoading, setIsLoading] = React.useState(true);
 
-    const dispatchPhotosArray = (photosArray) => {
+    const dispatchPhotosArray = (photos) => {
         return dispatch({
             type: 'FETCH_PHOTOS',
-            payload: photosArray
+            payload: photos
         });
     }
 
-    const setPagesFunction = (next, prev) => {
-        setNextPage(() => next);
-        setPrevPage(() => prev);
+    const getPhotosPage = (page) => {
+        console.log(page, !!allPhotos.length);
+        if(!!allPhotos.length){
+            if(page > pageCount) return;
+
+            const firstPhotoIndexForPage = (page - 1) * PHOTOS_PER_PAGE;
+            const arrayForPage = allPhotos.slice(firstPhotoIndexForPage, firstPhotoIndexForPage + PHOTOS_PER_PAGE);
+            console.log(firstPhotoIndexForPage, arrayForPage);
+            dispatchPhotosArray(arrayForPage);
+        }
     }
 
-    const getPhotosPage = async () => {
-        const {nextPage, prevPage, photosArray} = await firebase.getPhotosPage();
-      
-        setPagesFunction(nextPage, prevPage);
+    const getPhotos = async () => {
+        const photos = await firebase.getPhotos();
 
-        dispatchPhotosArray(photosArray);
+        setAllPhotos(photos);
+
+        setIsLoading(false);
     }
 
-    const getPhotosCount = async () => {
-        const PHOTOS_PER_PAGE = 8;
-        const photosCount = await firebase.getPhotosCount();
-        setPageCount(Math.ceil(photosCount / PHOTOS_PER_PAGE));
-    }
-
-    const prevPageHandler = async () => {
+    const prevPageHandler = () => {
         setPage(page - 1);
-
-        const photosArray = await prevPage();
-
-        dispatchPhotosArray(photosArray);
     }
 
-    const nextPageHandler = async () => {
+    const nextPageHandler = () => {
         setPage(page + 1);
-
-        const photosArray = await nextPage();
-
-        dispatchPhotosArray(photosArray);
     }
 
     useEffect(() => {
-        getPhotosPage();
-        getPhotosCount();
+        getPhotos();
     },[]);
+
+    useEffect(() => {
+        getPhotosPage(page);
+    }, [page]);
+
+    useEffect(() => {
+        if (allPhotos && allPhotos.length) {
+            const pageCount = Math.ceil(allPhotos.length / PHOTOS_PER_PAGE);
+            setPageCount(pageCount);
+        }
+    }, [isLoading]);
+
+    useEffect(() => {
+        getPhotosPage(FIRST_PAGE);
+    }, [pageCount]);
 
     const isCaratDisabled = (caratType) => {
         if (caratType === 'left' && page === FIRST_PAGE) {

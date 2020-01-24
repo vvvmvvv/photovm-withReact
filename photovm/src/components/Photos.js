@@ -1,24 +1,23 @@
 import React, {useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination';
-import firebase from '../firebase/config';
 import {Photos} from '../context/photosContext';
 
 const Gallery = () => {
     const {state} = React.useContext(Photos);
     const [photosCount, setPhotosCount] = React.useState(0);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = React.useState(false);
 
     useEffect(() => {
-        firebase.getPhotosCount()
-            .then((photosCount) => {
-                setPhotosCount(photosCount);
-                setIsLoading(false);
-            });
-    }, []);
+        const photosArray = state.photosArray;
+        if (photosArray && photosArray.length) {
+            setPhotosCount(photosArray.length)
+            setIsLoading(false);
+        }
+    }, [state.photosArray]);
 
     const photos = () => {
-        if (photosCount) {
+        if (true) {
             return (
                 <React.Fragment>
                     <div className='photos'>
