@@ -88,6 +88,10 @@ nav ul:first-of-type li:first-of-type{
   margin: 0 10px;
 }
 
+.pagination__carat_hidden {
+  visibility: hidden;
+}
+
 .photos{
   padding-top: 30px;
   padding-bottom: 80px;

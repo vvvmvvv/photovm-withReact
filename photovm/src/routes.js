@@ -9,7 +9,7 @@ import Signin from './components/Signin';
 import Login from './components/Login';
 import Create from './components/Create';
 import Photo from './components/Photo';
-import Gallery from './components/Photos';
+import Gallery from './components/Gallery';
 
 const Routes = () => (
     <Switch>

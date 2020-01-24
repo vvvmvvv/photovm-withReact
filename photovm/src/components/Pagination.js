@@ -1,23 +1,23 @@
-import React, {useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import firebase from '../firebase/config';
 import * as qs from 'query-string';
 import {Photos} from '../context/photosContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
-const Pagination = () => {
+const Pagination = ({render}) => {
     const FIRST_PAGE = 1;
     const PHOTOS_PER_PAGE = 2;
 
     const history = useHistory();
     const location = useLocation();
-    const {dispatch} = React.useContext(Photos);
-    const [page, setPage] = React.useState(() => {
+    const {dispatch} = useContext(Photos);
+    const [page, setPage] = useState(() => {
         const {page: pageFromUrl} = qs.parse(location.search);
         return +pageFromUrl || FIRST_PAGE;
     });
-    const [pageCount, setPageCount] = React.useState(0);
-    const [allPhotos, setAllPhotos] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [pageCount, setPageCount] = useState(0);
+    const [allPhotos, setAllPhotos] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
 
     const dispatchPhotosArray = (photos) => {
         return dispatch({
@@ -29,7 +29,12 @@ const Pagination = () => {
     const getPhotosPage = (page) => {
         if(!!allPhotos.length){
             if(page > pageCount) {
-                
+                setPage(pageCount);
+                return;
+            }
+            if(page < FIRST_PAGE){
+                setPage(FIRST_PAGE);
+                return;
             }
 
             const firstPhotoIndexForPage = (page - 1) * PHOTOS_PER_PAGE;
@@ -57,6 +62,13 @@ const Pagination = () => {
     const nextPageHandler = () => {
         setPage(prevPage => prevPage + 1);
     }
+    const firstPageHandler = () => {
+        setPage(FIRST_PAGE);
+    }
+
+    const lastPageHandler = () => {
+        setPage(pageCount);
+    }
 
     useEffect(() => {
         getPhotos();
@@ -73,7 +85,7 @@ const Pagination = () => {
         getPhotosPage(page);
     }, [isLoading]);
 
-    const isCaratDisabled = (caratType) => {
+    const isCaratHidden = (caratType) => {
         if (caratType === 'left' && page <= FIRST_PAGE) {
             return true;
         }
@@ -84,14 +96,32 @@ const Pagination = () => {
 
         return false;
     }
+    let gallery;
+    if(isLoading){
+        gallery = (
+            <div className="processing">
+                <p>Photos loading...</p>
+                <div className="loader"></div>
+            </div>
+        )
+    } else {
+        gallery = (
+            <React.Fragment>
+                {render()}
+                <div className="pagination">
+                    <button onClick={firstPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&laquo;</button>
+                    <button onClick={prevPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&lt;</button>
+                    <p>Page {page} of {pageCount}</p>
+                    <button onClick={nextPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&gt;</button>
+                    <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&raquo;</button>
+                </div>
+            </React.Fragment>
+        )
+    }
 
     return (
         <React.Fragment>
-            <div className="pagination">
-                <button onClick={prevPageHandler} disabled={isCaratDisabled('left')} className="pagination__carat">{'<'}</button>
-                <p>Page {page} of {pageCount}</p>
-                <button onClick={nextPageHandler} disabled={isCaratDisabled('right')} className="pagination__carat">{'>'}</button>
-            </div>
+            {gallery}
         </React.Fragment>
     );
 }
