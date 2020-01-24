@@ -1,14 +1,20 @@
 import React, {useEffect} from 'react';
 import firebase from '../firebase/config';
-
+import * as qs from 'query-string';
 import {Photos} from '../context/photosContext';
+import { useHistory, useLocation } from 'react-router-dom';
 
 const Pagination = () => {
     const FIRST_PAGE = 1;
     const PHOTOS_PER_PAGE = 2;
 
+    const history = useHistory();
+    const location = useLocation();
     const {dispatch} = React.useContext(Photos);
-    const [page, setPage] = React.useState(FIRST_PAGE);
+    const [page, setPage] = React.useState(() => {
+        const {page: pageFromUrl} = qs.parse(location.search);
+        return +pageFromUrl || FIRST_PAGE;
+    });
     const [pageCount, setPageCount] = React.useState(0);
     const [allPhotos, setAllPhotos] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
@@ -21,13 +27,14 @@ const Pagination = () => {
     }
 
     const getPhotosPage = (page) => {
-        console.log(page, !!allPhotos.length);
         if(!!allPhotos.length){
-            if(page > pageCount) return;
+            if(page > pageCount) {
+                
+            }
 
             const firstPhotoIndexForPage = (page - 1) * PHOTOS_PER_PAGE;
             const arrayForPage = allPhotos.slice(firstPhotoIndexForPage, firstPhotoIndexForPage + PHOTOS_PER_PAGE);
-            console.log(firstPhotoIndexForPage, arrayForPage);
+
             dispatchPhotosArray(arrayForPage);
         }
     }
@@ -35,17 +42,20 @@ const Pagination = () => {
     const getPhotos = async () => {
         const photos = await firebase.getPhotos();
 
-        setAllPhotos(photos);
+        setAllPhotos(photos)
+
+        const pageCount = Math.ceil(photos.length / PHOTOS_PER_PAGE);
+        setPageCount(pageCount);
 
         setIsLoading(false);
     }
 
     const prevPageHandler = () => {
-        setPage(page - 1);
+        setPage(prevPage => prevPage - 1);
     }
 
     const nextPageHandler = () => {
-        setPage(page + 1);
+        setPage(prevPage => prevPage + 1);
     }
 
     useEffect(() => {
@@ -53,22 +63,18 @@ const Pagination = () => {
     },[]);
 
     useEffect(() => {
+        if (isLoading) return;
+
+        history.push(`/photos?page=${page}`);
         getPhotosPage(page);
     }, [page]);
 
     useEffect(() => {
-        if (allPhotos && allPhotos.length) {
-            const pageCount = Math.ceil(allPhotos.length / PHOTOS_PER_PAGE);
-            setPageCount(pageCount);
-        }
+        getPhotosPage(page);
     }, [isLoading]);
 
-    useEffect(() => {
-        getPhotosPage(FIRST_PAGE);
-    }, [pageCount]);
-
     const isCaratDisabled = (caratType) => {
-        if (caratType === 'left' && page === FIRST_PAGE) {
+        if (caratType === 'left' && page <= FIRST_PAGE) {
             return true;
         }
 
