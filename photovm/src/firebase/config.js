@@ -13,9 +13,9 @@ const config = {
     appId: "1:502140250227:web:79b86f2bfc522034eaa206"
 }
 
-class Firebase{
+class Firebase {
 
-    constructor(){
+    constructor() {
         firebase.initializeApp(config);
         this.auth = firebase.auth();
         this.db = firebase.firestore();
@@ -23,15 +23,15 @@ class Firebase{
     }
 
     // login
-    async login(email, password){
-        const user = await firebase.auth().signInWithEmailAndPassword(email, password).catch(err =>{
+    async login(email, password) {
+        const user = await firebase.auth().signInWithEmailAndPassword(email, password).catch(err => {
             console.log(err);
             return err;
         });
         return user;
     }
     // signin
-    async signin(email, password){
+    async signin(email, password) {
         const user = await firebase.auth().createUserWithEmailAndPassword(email, password).catch(err => {
             console.log(err);
             return err;
@@ -39,7 +39,7 @@ class Firebase{
         return user;
     }
     // logout
-    async logout(){
+    async logout() {
         const logout = await firebase.auth().signOut().catch(err => {
             console.log(err);
             return err;
@@ -47,24 +47,27 @@ class Firebase{
         return logout;
     }
 
-    async getUserState(){
-        return new Promise(resolve =>{
+    async getUserState() {
+        return new Promise(resolve => {
             this.auth.onAuthStateChanged(resolve);
         });
     }
 
     // fetching photos
 
-    async getPhotos(){
+    async getPhotos() {
         let photosArray = [];
-        const photos = await firebase.firestore().collection('Photos').get();
+        const photos = await firebase.firestore().collection('Photos').orderBy('date', 'desc').get();
         photos.forEach(doc => {
-            photosArray.push({id:doc.id, data: doc.data()});
+            photosArray.push({
+                id: doc.id,
+                data: doc.data()
+            });
         });
         return photosArray;
     }
 
-    async getPhoto(photoid){
+    async getPhoto(photoid) {
         const photo = await firebase.firestore().collection('Photos').doc(photoid).get();
         const photoData = photo.data();
         return photoData;
@@ -75,12 +78,16 @@ class Firebase{
         return photos.docs.length;
     }
 
-    async createPhoto(url,photo){
+    async createPhoto(url, photo) {
         const fileRef = await firebase.storage().refFromURL(url);
+        const activeUser = await firebase.auth().currentUser;
 
         let newPhoto = {
             title: photo.title,
             description: photo.description,
+            author: activeUser.uid,
+            likes: [],
+            date: new Date(),
             photography: url,
             fileref: fileRef.location.path
         }
@@ -94,41 +101,47 @@ class Firebase{
 
 
 
-     async updatePhoto(url, photoid, photoData){
-        if(photoData['photography']){
-        
+    async updatePhoto(url, photoid, photoData) {
+        if (photoData['photography']) {
+            const fileRef = await firebase.storage().refFromURL(url);
 
-        const fileRef = await firebase.storage().refFromURL(url);
+            await this.storage.ref().child(photoData['oldphotography']).delete().catch(err => {
+                console.log(err);
+            });
 
+            let updatedPhoto = {
+                title: photoData.title,
+                description: photoData.description,
+                photography: url,
+                fileRef: fileRef.location.path
+            }
 
-        await this.storage.ref().child(photoData['oldphotography']).delete().catch(err => {
-            console.log(err);
-        });
-
-        let updatedPhoto = {
-            title: photoData.title,
-            description: photoData.description,
-            photography: url,
-            fileRef: fileRef.location.path
+            const photo = await firebase.firestore().collection('Photos').doc(photoid).set(updatedPhoto, {
+                merge: true
+            }).catch(err => {
+                console.log(err);
+            });
+            return photo;
+        } else {
+            const photo = await firebase.firestore().collection('Photos').doc(photoid).set(photoData, {
+                merge: true
+            }).catch(err => {
+                console.log(err);
+            });
+            return photo;
         }
-
-        const photo = await firebase.firestore().collection('Photos').doc(photoid).set(updatedPhoto, {merge: true}).catch(err => {
-            console.log(err);
-        });
-        return photo;
-    }else{
-        const photo = await firebase.firestore().collection('Photos').doc(photoid).set(photoData, {merge: true}).catch(err => {
-            console.log(err);
-        });
-        return photo;
     }
-}
 
-    async deletePhoto(photoid, fileref){
+    async updatePhotoLikes(photoid, newLikesData) {
+        await firebase.firestore().collection('Photos').doc(photoid).update(newLikesData)
+            .catch(console.log);
+    }
+
+    async deletePhoto(photoid, fileref) {
         const storageRef = firebase.storage().ref();
         await storageRef.child(fileref).delete().catch(err => {
             console.log(err);
-        }); 
+        });
         console.log("Image Deleted");
         const photo = await firebase.firestore().collection("Photos").doc(photoid).delete().catch(err => {
             console.log(err);

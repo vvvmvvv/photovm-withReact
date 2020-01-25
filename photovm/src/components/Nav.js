@@ -12,7 +12,6 @@ const Nav = (props) => {
     const {state, dispatch} = React.useContext(Auth);
 
     useEffect(() => {
-
         firebase.getUserState().then(user =>{
             if(user){
                 setUserState(user);

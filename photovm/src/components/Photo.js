@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Redirect} from 'react-router';
 import firebase from '../firebase/config';
+import Like from './Like';
 
 
 const Photo = (props) => {
@@ -26,7 +27,7 @@ const Photo = (props) => {
         });
 
         setPhoto(_photo);
-
+        setTimer(false);
     }
 
     useEffect(() => {
@@ -39,10 +40,6 @@ const Photo = (props) => {
                 setUserState(user);
             }
         });
-
-
-        setTimeout(() => setTimer(false), 1000);
-
     }, [props.match.params.id]);
 
 
@@ -52,9 +49,6 @@ const Photo = (props) => {
     if(redirect){
         return <Redirect to='/' />
     }
-
-
-
 
     let currentPhoto;
     let editButton;
@@ -109,7 +103,6 @@ const Photo = (props) => {
 
     const toggleEditMode = () => {
         setEditMode(!editMode);
-
     }
 
     const deleteCurrentPhoto = () => {
@@ -165,7 +158,7 @@ const Photo = (props) => {
         )
     }else{
 
-        if(userState){
+        if(userState.uid === photo.author){
             editButton = <button className="edit" onClick={(e) => toggleEditMode()}>Edit Photo </button>;
         }
 
@@ -174,6 +167,7 @@ const Photo = (props) => {
                 <img src={photo.photography} alt="photography"/>
                 <h2>{photo.title}</h2>
                 <div>{photo.description}</div>
+                <Like photo={photo} photoid={photoid}></Like>
                 {editButton}
                 {updateForm}
             </div>

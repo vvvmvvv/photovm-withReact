@@ -68,7 +68,7 @@ const Create = (props) =>{
 
     const redirect = routeRedirect;
     if(redirect){
-        return <Redirect to='/' />
+        return <Redirect to='/photos' />
     }
 
     let createForm;
@@ -85,10 +85,10 @@ const Create = (props) =>{
                 <p>&nbsp;&gt;&nbsp;Add a new photo&nbsp;&lt;&nbsp;</p>
 
                 <label htmlFor="title">Photo title:</label>
-                <input type="text" name="title" onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
 
                 <label htmlFor="description">Photo description:</label>
-                <textarea name="description" value=" " onChange={(e) => setDescription(e.target.value)}> </textarea>
+                <textarea name="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
 
                 <label htmlFor="photography">Choose photo:</label>
                 <input type="file" onChange={(e) => setPhotography(e.target.files)}/>

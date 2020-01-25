@@ -17,11 +17,17 @@ const Login = () => {
         if(response.hasOwnProperty('message')){
             console.log(response.message);
         }else{
-            //console.log(response.user)
+            const {uid: id, email} = response.user;
+            const user = {
+                id,
+                email
+            };
+
             setRouteRedirect(true);
+            console.log('nah');
             return dispatch({
                 type: 'LOGIN',
-                payload: response.user
+                payload: user
             });
         }
 

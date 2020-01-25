@@ -6,7 +6,8 @@ import {Photos} from '../context/photosContext';
 
 const Gallery = () => {
     const {state} = useContext(Photos);
-    const [photosCount, setPhotosCount] = useState(0); 
+    const [photosCount, setPhotosCount] = useState(0);
+    const [search, setSearch] = useState('');
     
     useEffect(() => {
         async function fetchData() {
@@ -33,12 +34,20 @@ const Gallery = () => {
         );
     }
 
+    const searchHandler = (value) => {
+        setSearch(value);
+    }
+
     const isGalleryFilled = () => {
         if (photosCount) {
             return (
                 <React.Fragment>
                     <h1> Photos gallery</h1>
-                    <Pagination render={galleryRender}></Pagination>
+                    <hr/>
+                        <label htmlFor="site-search">Search by photos:</label>
+                        <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
+                        <button>Search</button>
+                    <Pagination search={search} render={galleryRender}></Pagination>
                 </React.Fragment>
             );
         } else {
