@@ -70,8 +70,10 @@ class Firebase{
         return photoData;
     }
 
-
-
+    async getPhotosLength() {
+        const photos = await firebase.firestore().collection('Photos').get();
+        return photos.docs.length;
+    }
 
     async createPhoto(url,photo){
         const fileRef = await firebase.storage().refFromURL(url);

@@ -41,13 +41,11 @@ const Create = (props) =>{
                 //completed
                 const downloadUrl = await storageChild.getDownloadURL();
                 d = downloadUrl;
-                console.log(d);
                 resolve();
             });
         });
 
         firebase.createPhoto(d, photo).then((photo) => {
-            console.log(photo);
             setIsBusy(false);
             setRedirect(true);
         }).catch(err => {
@@ -90,7 +88,7 @@ const Create = (props) =>{
                 <input type="text" name="title" onChange={(e) => setTitle(e.target.value)}/>
 
                 <label htmlFor="description">Photo description:</label>
-                <textarea name="description"  onChange={(e) => setDescription(e.target.value)}> </textarea>
+                <textarea name="description" value=" " onChange={(e) => setDescription(e.target.value)}> </textarea>
 
                 <label htmlFor="photography">Choose photo:</label>
                 <input type="file" onChange={(e) => setPhotography(e.target.files)}/>
