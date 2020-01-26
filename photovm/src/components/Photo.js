@@ -18,7 +18,7 @@ const Photo = (props) => {
     const fileRef = useRef(null);
 
     const [photoid, setPhotoId] = useState("");
-    const [routeRedirect, setRedirect] = useState(false);
+    const [routeRedirect, setRedirect] = useState('');
 
     const getPhoto = async(photoid) => {
         const _photo = await firebase.getPhoto(photoid).catch(err => {
@@ -46,8 +46,8 @@ const Photo = (props) => {
     
 
     const redirect = routeRedirect;
-    if(redirect){
-        return <Redirect to='/' />
+    if (redirect === 'delete'){
+        return <Redirect to="/photos" />
     }
 
     let currentPhoto;
@@ -92,8 +92,10 @@ const Photo = (props) => {
       }   
       firebase.updatePhoto(d, photoid, _photo).then(() => {
         console.log("photo updated");
+        
+        getPhoto(photoid);
+        toggleEditMode();
         setIsBusy(false);
-        setRedirect(true);
     }).catch(err => {
         setIsBusy(false);
         console.log(err);
@@ -108,7 +110,7 @@ const Photo = (props) => {
     const deleteCurrentPhoto = () => {
         firebase.deletePhoto(photoid, photo.fileref)
         .then(() => {
-            setRedirect(true);
+            setRedirect('delete');
         }).catch(err => {
             console.log(err);
         })
@@ -158,7 +160,7 @@ const Photo = (props) => {
         )
     }else{
 
-        if(userState.uid === photo.author){
+        if(userState.email === photo.author){
             editButton = <button className="edit" onClick={(e) => toggleEditMode()}>Edit Photo </button>;
         }
 
@@ -167,6 +169,7 @@ const Photo = (props) => {
                 <img src={photo.photography} alt="photography"/>
                 <h2>{photo.title}</h2>
                 <div>{photo.description}</div>
+                <div>{photo.author}</div>
                 <Like photo={photo} photoid={photoid}></Like>
                 {editButton}
                 {updateForm}

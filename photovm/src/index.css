@@ -254,3 +254,9 @@ form * {
     transform: rotate(360deg);
   }
 }
+
+
+.sort-arrow{
+  background-color: #fff;
+  border-color: deepskyblue;
+}

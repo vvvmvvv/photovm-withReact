@@ -4,7 +4,7 @@ import * as qs from 'query-string';
 import {Photos} from '../context/photosContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
-const Pagination = ({search, render}) => {
+const Pagination = ({search, render, sort, filter}) => {
     const FIRST_PAGE = 1;
     const PHOTOS_PER_PAGE = 2;
 
@@ -20,6 +20,7 @@ const Pagination = ({search, render}) => {
     const [filteredPhotos, setFilteredPhotos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [filteredPhotosInitialized, setFilteredPhotosInitialized] = useState(false);
+    const [user, setUser] = useState(null);
 
     const dispatchPhotosArray = (photos) => {
         return dispatch({
@@ -41,7 +42,7 @@ const Pagination = ({search, render}) => {
 
             const firstPhotoIndexForPage = (page - 1) * PHOTOS_PER_PAGE;
             const arrayForPage = filteredPhotos.slice(firstPhotoIndexForPage, firstPhotoIndexForPage + PHOTOS_PER_PAGE);
-            
+
             dispatchPhotosArray(arrayForPage);
         } else {
             dispatchPhotosArray([]);
@@ -49,11 +50,30 @@ const Pagination = ({search, render}) => {
     }
 
     const filterPhotos = () => {
-        let newArray;
-        if (search === '') {
-            newArray = [...allPhotos];
-        } else {
-            newArray = [...allPhotos].filter(({data: photo}) => {
+        let newArray = [...allPhotos];
+
+        if (filter === 'myPhotos') {
+            newArray = [...newArray].filter(({data: photo}) => {
+                return photo.author === user.email
+            });
+        }
+
+        if (sort === 'date') {
+            newArray = [...newArray].sort((a, b) => b.data.date - a.data.date);
+        }
+
+        if (sort === 'title') {
+            newArray = [...newArray].sort((a, b) => {
+                const [aTitle, bTitle] = [a.data.title.toLowerCase(), b.data.title.toLowerCase()];
+
+                if (aTitle > bTitle) return 1;
+                if (bTitle > aTitle) return -1;
+                return 0;
+            });
+        }
+        
+        if (search !== '') {
+            newArray = [...newArray].filter(({data: photo}) => {
                 return photo.title.toLowerCase().includes(search.toLowerCase().trim());
             });
         }
@@ -93,6 +113,11 @@ const Pagination = ({search, render}) => {
     }
 
     useEffect(() => {
+        firebase.getUserState().then((user) => {
+            if (user) {
+                setUser(user);
+            }
+        })
         getPhotos();
     },[]);
 
@@ -115,7 +140,7 @@ const Pagination = ({search, render}) => {
             setFilteredPhotosInitialized(false);
             filterPhotos();
         }
-    }, [search]);
+    }, [search, filter, sort]);
 
     useEffect(() => {
         if (filteredPhotosInitialized) {

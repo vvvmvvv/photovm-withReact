@@ -36,11 +36,17 @@ const Like = ({photo, photoid}) => {
             setLikesArray(updatedArray);
         }
     };
+
+    const likeButton = () => {
+        if (currentUser) {
+            return <button onClick={likeHandler}>&hearts;</button>;
+        }
+    }
     
     return (
         <React.Fragment>
             <span>Likes: {likesCount}</span>
-            <button onClick={likeHandler}>&hearts;</button>
+            {likeButton()}
         </React.Fragment>
     )
 }

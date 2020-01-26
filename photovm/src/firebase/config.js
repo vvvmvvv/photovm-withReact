@@ -85,7 +85,7 @@ class Firebase {
         let newPhoto = {
             title: photo.title,
             description: photo.description,
-            author: activeUser.uid,
+            author: activeUser.email,
             likes: [],
             date: new Date(),
             photography: url,

@@ -24,7 +24,7 @@ const Login = () => {
             };
 
             setRouteRedirect(true);
-            console.log('nah');
+
             return dispatch({
                 type: 'LOGIN',
                 payload: user

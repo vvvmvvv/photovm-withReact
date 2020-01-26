@@ -11,9 +11,6 @@ const Create = (props) =>{
     const [routeRedirect, setRedirect] = useState(false);
     const [loading, setLoading] = useState('');
 
-
-
-
     const addPhoto = async(e) => {
         e.preventDefault();
         setIsBusy(true);
@@ -55,9 +52,6 @@ const Create = (props) =>{
         });
     }
 
-
-
-
     useEffect(() => {
         firebase.getUserState().then(user => {
             if(!user){
@@ -85,13 +79,13 @@ const Create = (props) =>{
                 <p>&nbsp;&gt;&nbsp;Add a new photo&nbsp;&lt;&nbsp;</p>
 
                 <label htmlFor="title">Photo title:</label>
-                <input type="text" name="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" name="title" value={title} required onChange={(e) => setTitle(e.target.value)}/>
 
                 <label htmlFor="description">Photo description:</label>
                 <textarea name="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
 
                 <label htmlFor="photography">Choose photo:</label>
-                <input type="file" onChange={(e) => setPhotography(e.target.files)}/>
+                <input type="file" required onChange={(e) => setPhotography(e.target.files)}/>
                 <hr/>
                 <input type="submit" value="Add photo"/>
 

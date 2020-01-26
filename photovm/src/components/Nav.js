@@ -32,8 +32,8 @@ const Nav = (props) => {
 
     let buttons;
     if(userState != null || state.user.hasOwnProperty('user')){
-        //console.log(state);
         buttons = ( <React.Fragment>
+                        <li><Link to='/create'> Add new Photo </Link></li>
                         <li>{userEmail}</li>
                         <li><button className="logout" onClick={logout}>LogOut</button></li>
                     </React.Fragment>)
@@ -57,7 +57,6 @@ const Nav = (props) => {
 
             <ul>
                 <li><Link to='/photos'> Gallery </Link></li>
-                <li><Link to='/create'> Add new Photo </Link></li>
                 {buttons}
             </ul>
         </nav>
