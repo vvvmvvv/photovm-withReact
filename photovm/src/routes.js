@@ -4,12 +4,12 @@ import {Switch, Route} from 'react-router-dom';
 
 
 //components 
-import Main from './components/Main';
-import Signin from './components/Signin';
-import Login from './components/Login';
-import Create from './components/Create';
-import Photo from './components/Photo';
-import Gallery from './components/Gallery';
+import Main from './components/Main/Main';
+import Signin from './components/Signin/Signin';
+import Login from './components/Login/Login';
+import Create from './components/Create/Create';
+import Photo from './components/Photo/Photo';
+import Gallery from './components/Gallery/Gallery';
 
 const Routes = () => (
     <Switch>

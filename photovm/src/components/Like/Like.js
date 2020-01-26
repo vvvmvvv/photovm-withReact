@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import firebase from '../firebase/config';
+import firebase from '../../firebase/config';
 
 const Like = ({photo, photoid}) => {
     const [currentUser, setCurrentUser] = useState(null);
@@ -25,13 +25,13 @@ const Like = ({photo, photoid}) => {
     }, [likesArray]);
 
     const likeHandler = async () => {
-        const isUserLiked = likesArray.includes(currentUser.id);
+        const isUserLiked = likesArray.includes(currentUser.email);
         if (isUserLiked) {
-            const updatedArray = likesArray.filter((likedUser) => likedUser !== currentUser.id);
+            const updatedArray = likesArray.filter((likedUser) => likedUser !== currentUser.email);
             await firebase.updatePhotoLikes(photoid, {likes: updatedArray});
             setLikesArray(updatedArray);
         } else {
-            const updatedArray = [...likesArray, currentUser.id];
+            const updatedArray = [...likesArray, currentUser.email];
             await firebase.updatePhotoLikes(photoid, {likes: updatedArray});
             setLikesArray(updatedArray);
         }

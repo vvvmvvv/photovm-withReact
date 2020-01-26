@@ -1,7 +1,7 @@
 import React, {useState, useEffect, useContext} from 'react';
-import firebase from '../firebase/config';
+import firebase from '../../firebase/config';
 import * as qs from 'query-string';
-import {Photos} from '../context/photosContext';
+import {Photos} from '../../context/photosContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
 const Pagination = ({search, render, sort, filter}) => {

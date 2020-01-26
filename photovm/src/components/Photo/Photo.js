@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import {Redirect} from 'react-router';
-import firebase from '../firebase/config';
-import Like from './Like';
+import firebase from '../../firebase/config';
+import Like from '../Like/Like';
 
 
 const Photo = (props) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import Routes from './routes'
-import Nav from './components/Nav'
+import Nav from './components/Nav/Nav'
 
 
 

@@ -1,8 +1,8 @@
 import React, {useContext, useState, useEffect}  from 'react';
 import { Link } from 'react-router-dom';
-import Pagination from './Pagination';
-import firebase from '../firebase/config';
-import {Photos} from '../context/photosContext';
+import Pagination from '../Pagination/Pagination';
+import firebase from '../../firebase/config';
+import {Photos} from '../../context/photosContext';
 
 const Gallery = () => {
     const {state} = useContext(Photos);

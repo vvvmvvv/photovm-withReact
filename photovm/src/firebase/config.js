@@ -53,7 +53,9 @@ class Firebase {
         });
     }
 
-    // fetching photos
+    //-------------------------------------------------------------------------------
+    // ------------------------------------------------------------------------------ WORK with PHOTOS
+    //-------------------------------------------------------------------------------
 
     async getPhotos() {
         let photosArray = [];
@@ -98,8 +100,6 @@ class Firebase {
         });
         return firestorePhoto;
     }
-
-
 
     async updatePhoto(url, photoid, photoData) {
         if (photoData['photography']) {

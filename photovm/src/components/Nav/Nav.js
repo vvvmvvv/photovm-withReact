@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from 'react-router-dom';
 
-import firebase from '../firebase/config'
-import {Auth} from '../context/authContext';
+import firebase from '../../firebase/config'
+import {Auth} from '../../context/authContext';
 
 
 const Nav = (props) => {

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { Redirect, withRouter} from 'react-router';
-import firebase from '../firebase/config'
+import firebase from '../../firebase/config'
 
 const Create = (props) =>{
     
