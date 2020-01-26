@@ -8,11 +8,13 @@ const Gallery = () => {
     const {state} = useContext(Photos);
     const [photosCount, setPhotosCount] = useState(0);
     const [search, setSearch] = useState('');
+    const [isLoading, setIsLoading] = useState(true);
     
     useEffect(() => {
         async function fetchData() {
             const photosCount = await firebase.getPhotosLength();
             setPhotosCount(photosCount);
+            setIsLoading(false);
         };
         fetchData();
     }, []);
@@ -39,18 +41,24 @@ const Gallery = () => {
     }
 
     const isGalleryFilled = () => {
+        if (isLoading) return (
+            <div className="processing">
+                <p>Photos loading...</p>
+                <div className="loader"></div>
+            </div>
+        );
+
         if (photosCount) {
             return (
                 <React.Fragment>
                     <h1> Photos gallery</h1>
                     <hr/>
-                        <label htmlFor="site-search">Search by photos:</label>
-                        <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
-                        <button>Search</button>
+                    <label htmlFor="site-search">Search by photos:</label>
+                    <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
                     <Pagination search={search} render={galleryRender}></Pagination>
                 </React.Fragment>
             );
-        } else {
+        } else if (!photosCount) {
             return (
                 <p>No photos!</p>
             );

@@ -19,6 +19,7 @@ const Pagination = ({search, render}) => {
     const [allPhotos, setAllPhotos] = useState([]);
     const [filteredPhotos, setFilteredPhotos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [filteredPhotosInitialized, setFilteredPhotosInitialized] = useState(false);
 
     const dispatchPhotosArray = (photos) => {
         return dispatch({
@@ -40,28 +41,31 @@ const Pagination = ({search, render}) => {
 
             const firstPhotoIndexForPage = (page - 1) * PHOTOS_PER_PAGE;
             const arrayForPage = filteredPhotos.slice(firstPhotoIndexForPage, firstPhotoIndexForPage + PHOTOS_PER_PAGE);
-
+            
             dispatchPhotosArray(arrayForPage);
+        } else {
+            dispatchPhotosArray([]);
         }
     }
 
     const filterPhotos = () => {
-        setIsLoading(true);
         let newArray;
         if (search === '') {
             newArray = [...allPhotos];
         } else {
             newArray = [...allPhotos].filter(({data: photo}) => {
-                return photo.title.toLowerCase().includes(search.toLowerCase());
+                return photo.title.toLowerCase().includes(search.toLowerCase().trim());
             });
         }
+        
         setFilteredPhotos(newArray);
-        setIsLoading(false);
+        setPagesCount(newArray.length);
+        setFilteredPhotosInitialized(true);
     }
 
     const getPhotos = async () => {
         const photos = await firebase.getPhotos();
-
+        
         setAllPhotos(photos);
         setFilteredPhotos(photos);
         setPagesCount(photos.length);
@@ -101,14 +105,24 @@ const Pagination = ({search, render}) => {
 
     useEffect(() => {
         if (!isLoading) {
-            getPhotosPage(FIRST_PAGE);
             setPagesCount(filteredPhotos.length);
+            getPhotosPage(page);
         }
     }, [isLoading]);
 
     useEffect(() => {
-        filterPhotos();
+        if (!isLoading) {
+            setFilteredPhotosInitialized(false);
+            filterPhotos();
+        }
     }, [search]);
+
+    useEffect(() => {
+        if (filteredPhotosInitialized) {
+            getPhotosPage(FIRST_PAGE);
+            setPage(FIRST_PAGE);
+        }
+    }, [filteredPhotos]);
 
     const isCaratHidden = (caratType) => {
         if (caratType === 'left' && page <= FIRST_PAGE) {
@@ -128,7 +142,9 @@ const Pagination = ({search, render}) => {
                 <p>Photos loading...</p>
                 <div className="loader"></div>
             </div>
-        )
+        );
+    } else if (!filteredPhotos.length) {
+        gallery = <p>No photos!</p>;
     } else {
         gallery = (
             <React.Fragment>
@@ -141,7 +157,7 @@ const Pagination = ({search, render}) => {
                     <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&raquo;</button>
                 </div>
             </React.Fragment>
-        )
+        );
     }
 
     return (
