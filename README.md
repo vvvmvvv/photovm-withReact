@@ -1,2 +1,2 @@
 # photovm-withReact
-React + firebase cite for epam
+React + firebase site for epam
