@@ -4,6 +4,7 @@ import s2 from '../../assets/images/s2.jpg';
 import s3 from '../../assets/images/s3.jpg';
 import s4 from '../../assets/images/s4.jpeg';
 import s5 from '../../assets/images/s5.jpg';
+import line from '../../assets/images/main-line.png';
 
 
 const Main = () => {
@@ -11,18 +12,27 @@ const Main = () => {
         <React.Fragment>
             <div className="container">
             <header>
-                <div>
-                <h1>&nbsp;&gt;&nbsp;Internet photo album </h1>
-                 <div className="textHeader">photo sharing service</div>
-                </div>
+
+            <div className="main__info">
+                        <div className="main__info-header">
+                            <h1><i class="fas fa-angle-left"></i>PhotoVM <i class="fas fa-angle-right"></i></h1>
+                        </div>
+                        <div className="main__info-line">
+                            <img src={line} alt="" height="100px" width="900px"/>
+                        </div>
+                        <div className="main__info-description">
+                            <h3><i class="fas fa-caret-right"></i> Internet photo album, photo sharing service <i
+                                    class="fas fa-caret-left"></i></h3>
+                        </div>
+                    </div>
 
                 <div className="wraper-slider">
                         <div className="slider">
                             <figure>
-                                <a href="#"><img src={s2} alt="" height="700px"/></a>
-                                <a href="#"><img src={s3} alt="" height="700px"/></a>
-                                <a href="#"><img src={s4} alt="" height="700px"/></a>
-                                <a href="#"><img src={s5} alt="" height="700px"/></a>
+                                <img src={s2} alt="" height="700px"/>
+                                <img src={s3} alt="" height="700px"/>
+                                <img src={s4} alt="" height="700px"/>
+                                <img src={s5} alt="" height="700px"/>
                             </figure>
                         </div>
                     </div>

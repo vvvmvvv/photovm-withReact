@@ -1,22 +1,23 @@
 
 nav{
-    background-color: teal;
+    background-color: black;
+    color: white;
 }
 
 .menu {
     display: flex;
     justify-content: space-between;
     text-align: center;
+    align-items: center;
 }
 
 .menu__items {
-    /* margin-right: 50px;
+    height: 100%;
     padding: 5px;
-    border-bottom: 2px solid white; */
 }
 
 .menu__items:hover {
-    border-bottom: 2px solid deepskyblue;
+    border-bottom: 1px solid deepskyblue;
 }
 
 .menu__items-list {
@@ -27,11 +28,10 @@ nav{
     position: relative;
     list-style-type: none;
     padding: 0px 10px;  
-    transition: background 0.2s linear;
+    transition: background 0.3s linear;
 }
 
 .menu__items-list li::after {
-
     content: "";
     display: inline-block;
     position: absolute;
@@ -52,7 +52,6 @@ nav{
     color: white;
     text-decoration: none;
     text-transform: uppercase;
-    font-size: 14px;
     padding: 5px 10px;
     transition: background 0.4s linear;
 }
@@ -62,3 +61,11 @@ nav{
     background-color: white;
 }
 
+
+
+
+.logout{
+    border: 2px solid deepskyblue;
+    color: white;
+    cursor: pointer;
+  }

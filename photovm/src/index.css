@@ -176,10 +176,7 @@ form * {
   margin-top: 40px;
 }
 
-.logout{
-  border: 2px solid black;
-  color: black;
-}
+
 .delete{
   background:red;
   color: white;

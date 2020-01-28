@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Link, withRouter} from 'react-router-dom';
-import "./Nav.css"
 
 import firebase from '../../firebase/config'
 import {Auth} from '../../context/authContext';
+
+import "./Nav.css"
+import logo from '../../assets/images/logo.png';
 
 
 const Nav = (props) => {
@@ -35,7 +37,7 @@ const Nav = (props) => {
     if(userState != null || state.user.hasOwnProperty('user')){
         buttons = ( <React.Fragment>
                         <button><Link to='/create'> Add new Photo </Link></button>
-                        <a>{userEmail}</a>
+                        <span>{userEmail}</span>
                         <button className="logout" onClick={logout}>LogOut</button>
                     </React.Fragment>)
     }else{
@@ -54,7 +56,9 @@ const Nav = (props) => {
                         <div className="container">
                             <div class="menu">
                                 <div class="logo">
-                                    <button><Link to='/'> PHOTOVM </Link></button>
+                                <Link to='/'>
+                                    <img src={logo} alt="logo" height="70px" width="90px"/>
+                                </Link>
                                 </div>
                                 <div class="menu__items">
                                         <ul class="menu__items-list">

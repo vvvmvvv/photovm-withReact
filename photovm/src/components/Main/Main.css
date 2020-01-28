@@ -1,6 +1,28 @@
 /*                                      CSS FOR MAIN COMPONENT                  */
 
 
+.main__info{
+    display: flex;
+    flex-direction: column;
+}
+
+.main__info-header{
+    display: flex;
+    align-self: center;
+    padding: 55px 0;
+
+}
+
+.main__info-description{
+    display: flex;
+    align-self: center;
+    padding: 25px 0;
+}
+.main__info-line{
+    margin: 0 auto;
+}
+
+
 
 /* for slider*/
 
