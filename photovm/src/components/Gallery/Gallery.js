@@ -84,6 +84,7 @@ const Gallery = () => {
         if (photosCount) {
             return (
                 <React.Fragment>
+                    <div className="container">
                     <h1> Photos gallery</h1>
                     <hr/>
                     <label htmlFor="site-search">Search by photos: </label>
@@ -97,6 +98,7 @@ const Gallery = () => {
                     {isFilterDisplayed()}
                     <hr/>
                     <Pagination search={search} sort={sort} filter={filter} render={galleryRender}></Pagination>
+                    </div>
                 </React.Fragment>
             );
         } else if (!photosCount) {
