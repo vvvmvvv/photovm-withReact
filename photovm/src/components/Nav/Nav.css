@@ -57,11 +57,44 @@ nav{
     background-color: white;
 }
 
-
-
-
-.logout{
-    border: 2px solid deepskyblue;
-    color: white;
+.login{
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin: 0px 10px;
+    padding: 5px 25px;
+    border: 2px solid white;
+    background-color: white;
+    color: black;
     cursor: pointer;
-  }
+}
+.login:hover{
+    background-color: black;
+    color: white;
+}
+.signin{
+    border-radius: 7px;
+    margin: 0px 10px;
+    text-transform: uppercase;
+    padding: 5px 25px;
+    cursor: pointer;
+    background-color: deepskyblue;
+    color: white;
+}
+.signin:hover{
+    background-color: black;
+    color: white;
+
+}
+.logout{
+    text-transform: uppercase;
+    border-radius: 5px;
+    margin: 0px 10px;
+    padding: 5px;
+    border: 2px solid white;
+    color: black;
+    cursor: pointer;
+}
+.logout:hover{
+    background-color: black;
+    color: white;
+}

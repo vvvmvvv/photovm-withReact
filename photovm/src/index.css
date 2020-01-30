@@ -32,23 +32,11 @@ body,html{
 
 }
 
-form {
-  width: 60%;
-  margin: 0 auto;
-  max-width: 900px;
-}
-
-form * {
-  width: 100%;
-  padding: 10px 0px;
-  border: none;
-  display: block;
-}
 
 .editForm{
   width: 100%;
 }
-.edit, .delete, .logout {
+.edit, .delete{
   background: none;
   padding: 10px;
   border: none;

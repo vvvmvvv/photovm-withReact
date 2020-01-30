@@ -100,7 +100,7 @@ const Gallery = () => {
     const isGalleryFilled = () => {
         if (isLoading) return (
             <div className="processing">
-                <p>Photos loading...</p>
+                <p>Photos gallery loading...</p>
                 <div className="loader"></div>
             </div> 
             );

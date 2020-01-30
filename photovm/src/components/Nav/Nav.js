@@ -42,9 +42,9 @@ const Nav = (props) => {
                     </React.Fragment>)
     }else{
         buttons = (
-        <React.Fragment>
-            <button><Link to='/signin'>SignIn</Link></button>    
-            <button><Link to='/login'>LogIn</Link></button>
+        <React.Fragment>   
+            <Link to='/login'> <button className="login">Login</button></Link>
+            <Link to='/signin'><button className="signin">Signin</button></Link>
         </React.Fragment>
         )
     }

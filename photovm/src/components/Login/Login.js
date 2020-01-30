@@ -3,6 +3,8 @@ import {Redirect} from 'react-router-dom';
 import firebase from '../../firebase/config';
 import { Auth } from '../../context/authContext';
 
+import "./Login.css"
+
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -40,8 +42,9 @@ const Login = () => {
 
     return (
         <React.Fragment>
-            <form onSubmit={login}>
-                <p>&nbsp;&gt;&nbsp;Login&nbsp;&lt;&nbsp;</p>
+            <div className="container">
+            <form className="login-form" onSubmit={login}>
+                <p className="login-form__header">Login</p>
 
                 <label htmlFor='email'>Email: </label>
                 <input type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
@@ -49,9 +52,9 @@ const Login = () => {
                 <label htmlFor='password'>Password: </label>
                 <input type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
-                <input type='submit' value="Login"/>
-
+                <button className="login-form__btn" type='submit'>Login</button>
             </form>
+            </div>
         </React.Fragment>
     )
 }
