@@ -4,6 +4,8 @@ import Pagination from '../Pagination/Pagination';
 import firebase from '../../firebase/config';
 import {Photos} from '../../context/photosContext';
 
+import "./Gallery.css"
+
 const Gallery = () => {
     const {state} = useContext(Photos);
     const [photosCount, setPhotosCount] = useState(0);
@@ -12,7 +14,18 @@ const Gallery = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [filter, setFilter] = useState('allPhotos');
     const [currentUser, setCurrentUser] = useState(null);
-    
+    const [userState, setUserState] = useState(null);
+
+
+    useEffect(() => {
+        firebase.getUserState().then(user =>{
+            if(user){
+                setUserState(user);
+            }
+        });
+    });
+
+
     useEffect(() => {
         async function fetchData() {
             const photosCount = await firebase.getPhotosLength();
@@ -61,17 +74,29 @@ const Gallery = () => {
         if (currentUser) {
             return (
                 <React.Fragment>
-                    <br/>
-                    <br/>
+                    <div className="functions__filter">
                     <span>Filter by: </span>
                     <select defaultValue={filter} onChange={(e) => filterHandler(e.target.value)}>
                         <option value="allPhotos">All Photos</option>
                         <option value="myPhotos">My Photos</option>
                     </select>
+                    </div>
                 </React.Fragment>
             )
         }
     }
+
+    const addButton = () => {
+        if(userState != null){
+            return (
+                    <div className="add-block">
+                         <Link to='/create'><button className="add-block__btn">Add Photo</button></Link> 
+                    </div>
+                      
+                )
+            }
+           
+        }
 
     const isGalleryFilled = () => {
         if (isLoading) return (
@@ -85,31 +110,49 @@ const Gallery = () => {
             return (
                 <React.Fragment>
                     <div className="container">
-                    <h1> Photos gallery</h1>
-                    <hr/>
-                    <label htmlFor="site-search">Search by photos: </label>
-                    <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
-                    <hr/>
-                    <span>Sorting by: </span>
-                    <select defaultValue={sort} onChange={(e) => sortHandler(e.target.value)}>
-                        <option value="date">Date</option>
-                        <option value="title">Title</option>
-                    </select>
+
+              
+                <div className="galleryPage">
+                        <div className="galleryPage__header">
+                            <h1><i className="fas fa-angle-left"></i> Photos gallery <i className="fas fa-angle-right"></i></h1>
+                        </div>
+                </div>
+
+                    <div className="functions">
+                        <div className="functions__search">
+                            <label>Search by photos: </label>
+                            <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
+                        </div>
+                    
+                        <div className="functions__sorting">
+                        <span>Sorting by: </span>
+                        <select defaultValue={sort} onChange={(e) => sortHandler(e.target.value)}>
+                                <option value="date">Date</option>
+                                <option value="title">Title</option>
+                        </select>
+                        </div>
+                    
                     {isFilterDisplayed()}
-                    <hr/>
-                    <Pagination search={search} sort={sort} filter={filter} render={galleryRender}></Pagination>
+                    </div>
+                    {addButton()}
+            <Pagination search={search} sort={sort} filter={filter} render={galleryRender}></Pagination>
                     </div>
                 </React.Fragment>
             );
         } else if (!photosCount) {
             return (
+                <React.Fragment>
                 <p>No photos!</p>
+                {addButton()}
+                </React.Fragment>
             );
         } 
     }
 
     return (
-        isGalleryFilled()
+        <React.Fragment>
+        {isGalleryFilled()}
+        </React.Fragment>
     );
 }
 

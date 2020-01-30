@@ -1,0 +1,41 @@
+.galleryPage{
+    display: flex;
+    flex-direction: column;
+}
+
+.galleryPage__header{
+    display: flex;
+    align-self: center;
+    padding: 55px 0;
+
+}
+
+.functions{
+    display: flex;
+    justify-content: space-around;
+}
+
+
+.add-block{
+    margin: 50px 0 40px 0px;
+    display: flex;
+    justify-content: center;
+}
+
+.add-block__btn{
+    background-color: white;
+    border: 2px solid black;
+    font-size: 24px;
+    transition-duration: 0.4s;
+    border-radius: 8px;
+    padding: 20px 80px;
+    cursor: pointer;
+    
+}
+
+.add-block__btn a{
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    
+}

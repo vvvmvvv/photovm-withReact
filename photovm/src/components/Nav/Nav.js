@@ -12,6 +12,7 @@ const Nav = (props) => {
     const [userState, setUserState] = useState(null);
     const [userEmail, setUserEmail] = useState("");
 
+
     const {state, dispatch} = React.useContext(Auth);
 
     useEffect(() => {
@@ -36,7 +37,6 @@ const Nav = (props) => {
     let buttons;
     if(userState != null || state.user.hasOwnProperty('user')){
         buttons = ( <React.Fragment>
-                        <button><Link to='/create'> Add new Photo </Link></button>
                         <span>{userEmail}</span>
                         <button className="logout" onClick={logout}>LogOut</button>
                     </React.Fragment>)
@@ -54,40 +54,30 @@ const Nav = (props) => {
                 
                  <nav className="nav">
                         <div className="container">
-                            <div class="menu">
-                                <div class="logo">
+                            <div className="menu">
+                                <div className="logo">
                                 <Link to='/'>
                                     <img src={logo} alt="logo" height="70px" width="90px"/>
                                 </Link>
                                 </div>
-                                <div class="menu__items">
-                                        <ul class="menu__items-list">
+                                <div className="menu__items">
+                                        <ul className="menu__items-list">
                                             <li><Link to='/'> Home </Link></li>
                                             <li><Link to='/photos'> Gallery </Link></li>
                                             <li><Link to='/about'> About </Link></li>
                                         </ul>
                                 </div>
-                                <div class="menu__btn">
+                                <div className="menu__btn">
                                         {buttons}
                                 </div>
+
                             </div>
                         
                         </div>
 
                  </nav>
 
-        // <nav className="nav">
-
-        //     <ul>
-        //         <li><Link to='/'> PhotoVM </Link></li>
-        //     </ul>
-
-        //     <ul>
-        //         <li><Link to='/about'> About </Link></li>
-        //         <li><Link to='/photos'> Gallery </Link></li>
-        //         {buttons}
-        //     </ul>
-        // </nav>
+    
         
 
     )

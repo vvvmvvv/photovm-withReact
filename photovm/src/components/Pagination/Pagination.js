@@ -6,7 +6,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 
 const Pagination = ({search, render, sort, filter}) => {
     const FIRST_PAGE = 1;
-    const PHOTOS_PER_PAGE = 2;
+    const PHOTOS_PER_PAGE = 6;
 
     const history = useHistory();
     const location = useLocation();

@@ -6,7 +6,6 @@ import s4 from '../../assets/images/s4.jpeg';
 import s5 from '../../assets/images/s5.jpg';
 import line from '../../assets/images/main-line.png';
 
-
 const Main = () => {
     return (
         <React.Fragment>
@@ -15,14 +14,15 @@ const Main = () => {
 
             <div className="main__info">
                         <div className="main__info-header">
-                            <h1><i class="fas fa-angle-left"></i>PhotoVM <i class="fas fa-angle-right"></i></h1>
+                            <h1><i className="fas fa-angle-left"></i> PhotoVM <i className="fas fa-angle-right"></i></h1>
+                            
                         </div>
                         <div className="main__info-line">
                             <img src={line} alt="" height="100px" width="900px"/>
                         </div>
                         <div className="main__info-description">
-                            <h3><i class="fas fa-caret-right"></i> Internet photo album, photo sharing service <i
-                                    class="fas fa-caret-left"></i></h3>
+                            <h3><i className="fas fa-caret-right"></i> Internet photo album, photo sharing service <i
+                                    className="fas fa-caret-left"></i></h3>
                         </div>
                     </div>
 
