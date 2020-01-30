@@ -7,6 +7,7 @@ import {Photos} from '../../context/photosContext';
 import "./Gallery.css"
 
 const Gallery = () => {
+
     const {state} = useContext(Photos);
     const [photosCount, setPhotosCount] = useState(0);
     const [search, setSearch] = useState('');
@@ -16,7 +17,6 @@ const Gallery = () => {
     const [currentUser, setCurrentUser] = useState(null);
     const [userState, setUserState] = useState(null);
 
-
     useEffect(() => {
         firebase.getUserState().then(user =>{
             if(user){
@@ -24,7 +24,6 @@ const Gallery = () => {
             }
         });
     });
-
 
     useEffect(() => {
         async function fetchData() {
@@ -82,7 +81,7 @@ const Gallery = () => {
                     </select>
                     </div>
                 </React.Fragment>
-            )
+                )
         }
     }
 
@@ -92,10 +91,8 @@ const Gallery = () => {
                     <div className="add-block">
                          <Link to='/create'><button className="add-block__btn">Add Photo</button></Link> 
                     </div>
-                      
                 )
             }
-           
         }
 
     const isGalleryFilled = () => {
@@ -103,15 +100,14 @@ const Gallery = () => {
             <div className="processing">
                 <p>Photos loading...</p>
                 <div className="loader"></div>
-            </div>
-        );
+            </div> 
+            );
 
         if (photosCount) {
             return (
                 <React.Fragment>
                     <div className="container">
 
-              
                 <div className="galleryPage">
                         <div className="galleryPage__header">
                             <h1><i className="fas fa-angle-left"></i> Photos gallery <i className="fas fa-angle-right"></i></h1>
@@ -150,9 +146,7 @@ const Gallery = () => {
     }
 
     return (
-        <React.Fragment>
-        {isGalleryFilled()}
-        </React.Fragment>
+        isGalleryFilled()
     );
 }
 
