@@ -2,6 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Redirect, withRouter} from 'react-router';
 import firebase from '../../firebase/config'
 
+import "./Create.css"
+
 const Create = (props) =>{
     
     const [title, setTitle] = useState('');
@@ -75,8 +77,8 @@ const Create = (props) =>{
         )
     }else{
         createForm = (
-            <form onSubmit={addPhoto}>
-                <p>&nbsp;&gt;&nbsp;Add a new photo&nbsp;&lt;&nbsp;</p>
+            <form className="create-form" onSubmit={addPhoto}>
+                <p className="create-form__header">Add New Photo</p>
 
                 <label htmlFor="title">Photo title:</label>
                 <input type="text" name="title" value={title} required onChange={(e) => setTitle(e.target.value)}/>
@@ -87,7 +89,7 @@ const Create = (props) =>{
                 <label htmlFor="photography">Choose photo:</label>
                 <input type="file" required onChange={(e) => setPhotography(e.target.files)}/>
                 <hr/>
-                <input type="submit" value="Add photo"/>
+                <button className="create-form__btn" type="submit">Add Photo to Gallery </button>
 
             </form>
         )

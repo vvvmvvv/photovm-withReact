@@ -3,6 +3,8 @@ import {Redirect} from 'react-router';
 import firebase from '../../firebase/config';
 import Like from '../Like/Like';
 
+import "./Photo.css"
+
 
 const Photo = (props) => {
 
@@ -165,14 +167,16 @@ const Photo = (props) => {
         }
 
         currentPhoto = (
+            <div className="container">
             <div className="single">
+                <h2>Title: {photo.title}</h2>
                 <img src={photo.photography} alt="photography"/>
-                <h2>{photo.title}</h2>
-                <div>{photo.description}</div>
-                <div>{photo.author}</div>
+                <div>Description: {photo.description}</div>
+                <div>Author: {photo.author}</div>
                 <Like photo={photo} photoid={photoid}></Like>
                 {editButton}
                 {updateForm}
+            </div>
             </div>
         )
     }

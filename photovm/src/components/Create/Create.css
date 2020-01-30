@@ -1,29 +1,28 @@
-
-.signin-form {
+.create-form {
     display: flex;
     flex-direction: column;
     margin: 60px auto;
     max-width: 700px;
     padding: 40px 30px;
-    background-color: deepskyblue;
+    background-color: black;
     border-radius: 8px;
     color: white;
   }
 
-  .signin-form__header{
+  .create-form__header{
       font-size: 20px;
       display: flex;
       justify-content: center;
       text-transform: uppercase;
   }
 
-  .signin-form__btn{
+  .create-form__btn{
       margin: 30px auto;
       width: 200px;
       border: 2px solid white;
   }
 
-  .signin-form__btn:hover{
+  .create-form__btn:hover{
       background-color: black;
       color: white;
       cursor: pointer;

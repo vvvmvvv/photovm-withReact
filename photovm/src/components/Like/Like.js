@@ -39,7 +39,7 @@ const Like = ({photo, photoid}) => {
 
     const likeButton = () => {
         if (currentUser) {
-            return <button onClick={likeHandler}>&hearts;</button>;
+            return <button onClick={likeHandler}> &hearts;</button>;
         }
     }
     

@@ -50,11 +50,13 @@ nav{
     text-transform: uppercase;
     padding: 5px 10px;
     transition: background 0.4s linear;
+    border-radius: 7px;
 }
 
 .menu__items-list a:hover {
     color: black;
     background-color: white;
+    border-radius: 7px;
 }
 
 .login{

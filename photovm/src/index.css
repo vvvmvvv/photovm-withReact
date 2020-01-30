@@ -17,42 +17,16 @@ body,html{
   padding: 0 15px;
 }
 
-
 .processing{
   width: 40%;
   margin: 120px auto;
   text-align: center;
 }
 
-
 .process {
   display: block;
   color: deepskyblue;
   font-size: 3rem;
-
-}
-
-
-.editForm{
-  width: 100%;
-}
-.edit, .delete{
-  background: none;
-  padding: 10px;
-  border: none;
-}
-
-.edit{
-  border: 1px solid black;
-  color: black;
-  margin-top: 40px;
-}
-
-
-.delete{
-  background:red;
-  color: white;
-  margin-top: 100px;
 }
 
 .loader,
@@ -73,7 +47,6 @@ body,html{
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-
 }
 
 .loader::before,
