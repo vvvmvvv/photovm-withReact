@@ -16,10 +16,6 @@ nav{
     padding: 5px;
 }
 
-.menu__items:hover {
-    border-bottom: 1px solid deepskyblue;
-}
-
 .menu__items-list {
     display: flex;
 }
@@ -27,7 +23,7 @@ nav{
 .menu__items-list li {
     position: relative;
     list-style-type: none;
-    padding: 0px 10px;  
+    padding: 0px 30px;  
     transition: background 0.3s linear;
 }
 
@@ -35,11 +31,11 @@ nav{
     content: "";
     display: inline-block;
     position: absolute;
-    height: 17px;
-    top: -7px;
-    right: 5px;
+    height: 15px;
+    top: -5px;
+    right: 2px;
     margin-top: 9px;
-    width: 2px;
+    width: 3px;
     background-color:white;
 
 }

@@ -4,6 +4,8 @@ import * as qs from 'query-string';
 import {Photos} from '../../context/photosContext';
 import { useHistory, useLocation } from 'react-router-dom';
 
+import "./Pagination.css"
+
 const Pagination = ({search, render, sort, filter}) => {
     const FIRST_PAGE = 1;
     const PHOTOS_PER_PAGE = 6;
@@ -169,17 +171,19 @@ const Pagination = ({search, render, sort, filter}) => {
             </div>
         );
     } else if (!filteredPhotos.length) {
-        gallery = <p>No photos!</p>;
+        gallery = <p className="no-gallery">No photos!</p>;
     } else {
         gallery = (
             <React.Fragment>
                 {render()}
+                <div className="container">
                 <div className="pagination">
                     <button onClick={firstPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&laquo;</button>
                     <button onClick={prevPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&lt;</button>
-                    <p>Page {page} of {pageCount}</p>
+                    <p class="pagination__text">Page {page} of {pageCount}</p>
                     <button onClick={nextPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&gt;</button>
                     <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&raquo;</button>
+                </div>
                 </div>
             </React.Fragment>
         );

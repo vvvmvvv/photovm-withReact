@@ -45,11 +45,13 @@ const Gallery = () => {
             <div className='photos'>
                 {state.photos.map(photo => {
                     return(
+                        <div className="photo-content">
                         <div className='photo' key={photo.id}>
                             <Link to={'photos/' + photo.id}>
-                                <p>{photo.data.title}</p>
+                                <p className="photo-title">{photo.data.title}</p>
                                 <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
                             </Link> 
+                        </div>
                         </div>
                     )
                 })}
@@ -138,7 +140,7 @@ const Gallery = () => {
         } else if (!photosCount) {
             return (
                 <React.Fragment>
-                <p>No photos!</p>
+                <p className="no-gallery">No photos!</p>
                 {addButton()}
                 </React.Fragment>
             );
