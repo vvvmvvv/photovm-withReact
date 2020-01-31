@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import firebase from '../../firebase/config';
 
+import './Like.css'
+
 const Like = ({photo, photoid}) => {
     const [currentUser, setCurrentUser] = useState(null);
     const [likesCount, setLikesCount] = useState(0);
@@ -39,14 +41,27 @@ const Like = ({photo, photoid}) => {
 
     const likeButton = () => {
         if (currentUser) {
-            return <button onClick={likeHandler}> &hearts;</button>;
+            return(
+                <React.Fragment>
+                    
+                    <div className="row-like">
+                    <label className="like">
+                    <input onClick={likeHandler} type="checkbox" className="like__button"/>
+                    <span className="like__heart"></span>
+                    </label>
+                    </div>
+            
+            </React.Fragment>
+            )
         }
     }
     
     return (
         <React.Fragment>
+            <div className="row-like">
             <span>Likes: {likesCount}</span>
             {likeButton()}
+            </div>
         </React.Fragment>
     )
 }

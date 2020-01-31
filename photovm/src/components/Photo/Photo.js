@@ -169,11 +169,17 @@ const Photo = (props) => {
         currentPhoto = (
             <div className="container">
             <div className="single">
-                <h2>Title: {photo.title}</h2>
+                <h2 className="single-title">Title: {photo.title}</h2>
                 <img src={photo.photography} alt="photography"/>
-                <div>Description: {photo.description}</div>
-                <div>Author: {photo.author}</div>
+                <div className="single-all">
+                    <div className="single__info">
+                            <div className="single__info-description"><span className="description">Description: <br/></span> {photo.description}</div>
+                            <div className="single__info-author"><span className="author">Author:</span> {photo.author}</div>
+                    </div>
+                    <div className="single-like">
                 <Like photo={photo} photoid={photoid}></Like>
+                    </div>
+                </div>
                 {editButton}
                 {updateForm}
             </div>

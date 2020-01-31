@@ -12,6 +12,8 @@ import Photo from './components/Photo/Photo';
 import Gallery from './components/Gallery/Gallery';
 import About from './components/About/About';
 
+import Error from './components/Error/Error';
+
 const Routes = () => (
     <Switch>
         <Route exact path='/' component={Main}/>
@@ -21,6 +23,7 @@ const Routes = () => (
         <Route exact path='/photos' component={Gallery} />
         <Route exact path='/photos/:id' component={Photo} />
         <Route exact path='/about' component={About} />
+        <Route exact path='*' component={Error} />
     </Switch>
 );
 

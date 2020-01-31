@@ -1,33 +1,75 @@
-
-  .single {
-    width: 900px;
+.single {
+    max-width: 900px;
+    width: 70%;
     margin: 70px auto;
-    padding-bottom: 100px;
-    
-  }
-  
-  .single > img {
-    width: 100%;
-  }
+    padding: 50px 20px;
+    border-radius: 8px;
+    background-color: whitesmoke;
+    color: black;
 
-.editForm{
+
+}
+
+.single>img {
     width: 100%;
-  }
-  .edit, .delete{
+}
+
+.single-all {
+    margin: 20px 5px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.single__info {
+    display: flex;
+    flex-direction: column;
+    max-width: 100%;
+}
+
+.single__info-description {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+    max-width: 80%;
+    word-break: break-all;
+}
+
+.single__info-author {
+    padding: 10px;
+    width: 500px;
+    margin-top: 20px;
+}
+
+.description{
+    font-size: 18px;
+    font-weight: bold;
+}
+.author{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+
+.editForm {
+    width: 100%;
+}
+
+.edit,
+.delete {
     background: none;
     padding: 10px;
     border: none;
-  }
-  
-  .edit{
+}
+
+.edit {
     border: 1px solid black;
     color: black;
     margin-top: 40px;
-  }
-  
-  
-  .delete{
-    background:red;
+}
+
+
+.delete {
+    background: red;
     color: white;
     margin-top: 100px;
-  }
+}

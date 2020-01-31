@@ -1,0 +1,22 @@
+.like {
+    display: inline-block;
+    font-size: 30px;
+    cursor: pointer;
+  }
+  
+  .like__button {
+    display: none;
+  }
+  
+  .like__heart:before {
+    content: '\f08a';
+    font-family: fontAwesome;
+    color: gray;
+  }
+  
+  :checked+.like__heart:before {
+    content: '\f004';
+    color: red;
+  }
+
+  .row-like{}
