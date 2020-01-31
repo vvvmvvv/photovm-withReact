@@ -171,18 +171,18 @@ const Pagination = ({search, render, sort, filter}) => {
             </div>
         );
     } else if (!filteredPhotos.length) {
-        gallery = <p className="no-gallery">No photos!</p>;
+        gallery = <p className="no-gallery">No photos with this title!</p>;
     } else {
         gallery = (
             <React.Fragment>
                 {render()}
                 <div className="container">
                 <div className="pagination">
-                    <button onClick={firstPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&laquo;</button>
-                    <button onClick={prevPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}>&lt;</button>
-                    <p class="pagination__text">Page {page} of {pageCount}</p>
-                    <button onClick={nextPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&gt;</button>
-                    <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}>&raquo;</button>
+                    <button onClick={firstPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}><i className="fas fa-angle-double-left"></i></button>
+                    <button onClick={prevPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}><i className="fas fa-chevron-left"></i></button>
+                    <p className="pagination__text"><i className="fas fa-book-open"></i>&nbsp; Page {page} of {pageCount}</p>
+                    <button onClick={nextPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}><i className="fas fa-chevron-right"></i></button>
+                    <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}><i className="fas fa-angle-double-right"></i></button>
                 </div>
                 </div>
             </React.Fragment>

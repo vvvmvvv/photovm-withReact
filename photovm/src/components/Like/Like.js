@@ -44,7 +44,7 @@ const Like = ({photo, photoid}) => {
             return(
                 <React.Fragment>
                     
-                    <div className="row-like">
+                    <div className="row-like__click">
                     <label className="like">
                     <input onClick={likeHandler} type="checkbox" className="like__button"/>
                     <span className="like__heart"></span>
@@ -59,7 +59,9 @@ const Like = ({photo, photoid}) => {
     return (
         <React.Fragment>
             <div className="row-like">
-            <span>Likes: {likesCount}</span>
+                <div className="row-like__text">Likes: 
+                    <span className="like__count">{likesCount}</span>
+                </div>
             {likeButton()}
             </div>
         </React.Fragment>

@@ -1,6 +1,15 @@
-.text-center{
+.error-text{
     display: flex;
     justify-content: center;
-    margin-top: 200px;
-    font-size: 24px;    
+    margin-top: 100px;
+    font-size: 24px;
+
+}
+
+.error-image{
+    display: block;
+    height: 400px;
+    width:  500px;
+    margin: 0 auto;
+    align-self: center;
 }

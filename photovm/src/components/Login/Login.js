@@ -44,13 +44,13 @@ const Login = () => {
         <React.Fragment>
             <div className="container">
             <form className="login-form" onSubmit={login}>
-                <p className="login-form__header">Login</p>
+                <h3 className="login-form__header"><i className="fas fa-sign-in-alt"></i> Login</h3>
 
-                <label htmlFor='email'>Email: </label>
-                <input type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
+                <label htmlFor='email'><i className="fas fa-envelope-square"> Email:</i> </label>
+                <input required type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
 
-                <label htmlFor='password'>Password: </label>
-                <input type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
+                <label htmlFor='password'><i className="fas fa-lock"> Password:</i> </label>
+                <input required type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <button className="login-form__btn" type='submit'>Login</button>
             </form>

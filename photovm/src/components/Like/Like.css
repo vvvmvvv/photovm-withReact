@@ -19,4 +19,26 @@
     color: red;
   }
 
-  .row-like{}
+  .row-like{
+      border: 2px solid black;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 5px 10px;
+      margin: 0 10px;
+  }
+  .row-like__click{
+      display: flex;
+      padding: 5px 5px;
+  }
+  .row-like__text{
+      padding: 0px 5px;
+      font-weight: bold;
+      font-size: 17px;
+  }
+
+  .like__count{
+    padding: 0px 5px;
+    font-size: 17px;
+  }

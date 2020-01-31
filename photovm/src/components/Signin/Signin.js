@@ -36,14 +36,14 @@ const Signin = () => {
 
     return (
         <React.Fragment>
-            <form class="signin-form"onSubmit={signin}>
-                <p className="signin-form__header">Signin</p>
+            <form className="signin-form"onSubmit={signin}>
+                <h3 className="signin-form__header"><i className="fas fa-user-plus"></i> Signin</h3>
 
-                <label htmlFor='email'>Email: </label>
-                <input type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
+                <label htmlFor='email'><i className="fas fa-envelope-square"> Email:</i></label>
+                <input required type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
 
-                <label htmlFor='password'>Password: </label>
-                <input type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
+                <label htmlFor='password'><i className="fas fa-lock"> Password:</i> </label>
+                <input required type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <button className="signin-form__btn" type='submit'>Create account</button>
 

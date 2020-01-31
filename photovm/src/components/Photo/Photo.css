@@ -1,17 +1,16 @@
 .single {
     max-width: 900px;
-    width: 70%;
-    margin: 70px auto;
-    padding: 50px 20px;
+    width: 80%;
+    margin: 0px auto;
+    padding: 30px 40px;
     border-radius: 8px;
     background-color: whitesmoke;
     color: black;
-
-
 }
 
 .single>img {
     width: 100%;
+    
 }
 
 .single-all {
@@ -23,42 +22,67 @@
 .single__info {
     display: flex;
     flex-direction: column;
-    max-width: 100%;
+    max-width: 70%;
 }
 
 .single__info-description {
     display: flex;
     flex-wrap: wrap;
     padding: 10px;
-    max-width: 80%;
+    max-width: 70%;
     word-break: break-all;
 }
 
 .single__info-author {
     padding: 10px;
     width: 500px;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 
-.description{
-    font-size: 18px;
-    font-weight: bold;
-}
-.author{
+.description {
     font-size: 18px;
     font-weight: bold;
 }
 
+.author {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.single-title{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+.edit-btn{
+    cursor: pointer;
+}
+.edit-btn:hover{
+    background-color: orange;
+    color:black;
+}
 
 .editForm {
     width: 100%;
+    margin: 15px 0px;
+    padding: 15px 10px;
+    border-radius: 7px;
+    border: 1px solid black;
 }
 
-.edit,
+.edit{
+    background: orange;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
 .delete {
+    text-align: end;
     background: none;
     padding: 10px;
     border: none;
+    cursor: pointer;
 }
 
 .edit {

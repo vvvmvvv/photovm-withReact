@@ -6,18 +6,39 @@
 .galleryPage__header{
     display: flex;
     align-self: center;
-    padding: 55px 0;
+    padding: 20px 0;
+    margin-bottom: 40px;
 
 }
 
+.main-wrapper{
+    margin: 30px 5px;   
+    background-color: whitesmoke;
+    border-radius: 8px;
+    padding: 10px 30px;
+}
+
 .functions{
+    display: flex;
+    margin: 0 auto;
+    max-width: 80%;
+    width: 800px;
     color: white;
     background-color: black;
-    display: flex;
-    justify-content: space-around;
-    border: 8px solid deepskyblue;
+    border: 4px solid deepskyblue;
     border-radius: 4px;
     padding: 30px;
+    margin-bottom: 20px;
+}
+.functions__sorting{
+    padding: 5px 5px;
+}
+.functions__filter{
+    padding: 10px 5px;
+}
+.functions__search{
+    margin: 10px 50px;
+    padding: 5px 5px;
 }
 
 
@@ -51,7 +72,6 @@
 }
 
 .photo-content{
-    border: 2px solid black;
     border-radius: 4px;
     padding: 5px;
     margin: 1px;
@@ -61,11 +81,12 @@
 }
 .photo-title{
     background-color: white;
-    border-radius: 5px;
+    border-radius: 2px;
     color: black;
     padding: 10px;
     margin-bottom: 10px;
     text-align: center;
+    border-bottom: 2px solid black;
 }
 
 .photo-title:hover{
@@ -76,6 +97,7 @@
 
 
 .photos{
+    border-radius: 6px;
     padding-top: 10px;
     padding-bottom: 20px;
     display: flex;
@@ -86,16 +108,20 @@
   }
   
   .photo{
-    width: 350px;
-    min-width: 300px;
+    min-width: 250px;
     position: relative;
     padding: 10px 10px;
-    
+    border: 3px solid white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  }
+  .photo:hover{
+      border: 3px solid deepskyblue;
   }
   
   .photo > a div{
     display: block;
-    height: 350px;
+    height: 250px;
     background-position: center;
     background-size: 200%;
     transition: background-size 1s ease-in-out;

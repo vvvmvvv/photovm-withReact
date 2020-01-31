@@ -77,19 +77,19 @@ const Create = (props) =>{
         )
     }else{
         createForm = (
-            <form className="create-form" onSubmit={addPhoto}>
-                <p className="create-form__header">Add New Photo</p>
+            <form className="create-form" onSubmit={addPhoto} enctype="multipart/form-data" method="post" >
+                <p className="create-form__header"><i className="far fa-folder-open"></i> Add New Photo</p>
 
                 <label htmlFor="title">Photo title:</label>
                 <input type="text" name="title" value={title} required onChange={(e) => setTitle(e.target.value)}/>
 
                 <label htmlFor="description">Photo description:</label>
-                <textarea name="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
+                <textarea  required name="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
 
                 <label htmlFor="photography">Choose photo:</label>
-                <input type="file" required onChange={(e) => setPhotography(e.target.files)}/>
+                <input accept="image/*" type="file" required onChange={(e) => setPhotography(e.target.files)}/>
                 <hr/>
-                <button className="create-form__btn" type="submit">Add Photo to Gallery </button>
+                <button className="create-form__btn" type="submit"><i className="fas fa-upload"></i> Add Photo to Gallery </button>
 
             </form>
         )

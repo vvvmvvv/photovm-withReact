@@ -76,7 +76,7 @@ const Gallery = () => {
             return (
                 <React.Fragment>
                     <div className="functions__filter">
-                    <span>Filter by: </span>
+                    <span><i className="fas fa-filter"></i> Filter by: </span>
                     <select defaultValue={filter} onChange={(e) => filterHandler(e.target.value)}>
                         <option value="allPhotos">All Photos</option>
                         <option value="myPhotos">My Photos</option>
@@ -91,7 +91,7 @@ const Gallery = () => {
         if(userState != null){
             return (
                     <div className="add-block">
-                         <Link to='/create'><button className="add-block__btn">Add Photo</button></Link> 
+                         <Link to='/create'><button className="add-block__btn"><i className="far fa-folder-open"></i> Add Photo</button></Link> 
                     </div>
                 )
             }
@@ -109,38 +109,41 @@ const Gallery = () => {
             return (
                 <React.Fragment>
                     <div className="container">
+                            <div className="main-wrapper">
+                            <div className="galleryPage">
+                                    <div className="galleryPage__header">
+                                    <h1><i className="far fa-images"></i> Photos gallery</h1>
+                                    </div>
+                            </div>
 
-                <div className="galleryPage">
-                        <div className="galleryPage__header">
-                            <h1><i className="fas fa-angle-left"></i> Photos gallery <i className="fas fa-angle-right"></i></h1>
-                        </div>
-                </div>
+                             <div className="functions">
+                                 <div className="functions-top">
+                                        <div className="functions__sorting">
+                                            <span><i className="fas fa-sort-amount-down-alt"></i> Sorting by: </span>
+                                            <select defaultValue={sort} onChange={(e) => sortHandler(e.target.value)}>
+                                                <option value="date">Date</option>
+                                                <option value="title">Title</option>
+                                            </select>
+                                            </div>
 
-                    <div className="functions">
-                        <div className="functions__search">
-                            <label>Search by photos: </label>
-                            <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
-                        </div>
-                    
-                        <div className="functions__sorting">
-                        <span>Sorting by: </span>
-                        <select defaultValue={sort} onChange={(e) => sortHandler(e.target.value)}>
-                                <option value="date">Date</option>
-                                <option value="title">Title</option>
-                        </select>
-                        </div>
-                    
-                    {isFilterDisplayed()}
-                    </div>
-                    {addButton()}
+                                        {isFilterDisplayed()}
+                                        
+                                </div>
+                            <div className="functions__search">
+                                        <label><i className="fas fa-search"></i> Search by photos: </label>
+                                        <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
+                                    </div>
+                            </div>
+                            {addButton()}
             <Pagination search={search} sort={sort} filter={filter} render={galleryRender}></Pagination>
+                    </div>
                     </div>
                 </React.Fragment>
             );
         } else if (!photosCount) {
             return (
                 <React.Fragment>
-                <p className="no-gallery">No photos!</p>
+                <p className="no-gallery">No photos! You can add photo, use button above!</p>
                 {addButton()}
                 </React.Fragment>
             );

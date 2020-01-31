@@ -1,11 +1,11 @@
-.about{
+.header-center{
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    padding: 20px 0;
+    margin-bottom: 40px;
 }
 
-.about__header{
+.about{
     display: flex;
-    align-self: center;
-    padding: 55px 0;
-
+    padding: 0px 20px;
 }

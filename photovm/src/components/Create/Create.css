@@ -11,8 +11,7 @@
 
   .create-form__header{
       font-size: 20px;
-      display: flex;
-      justify-content: center;
+      text-align: center;
       text-transform: uppercase;
   }
 

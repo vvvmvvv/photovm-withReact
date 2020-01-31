@@ -5,15 +5,15 @@
     margin: 60px auto;
     max-width: 700px;
     padding: 40px 30px;
-    background-color: deepskyblue;
+    background-color:deepskyblue;
     border-radius: 8px;
-    color: white;
+    border: 4px solid black;
+    color: black;
   }
 
   .signin-form__header{
       font-size: 20px;
-      display: flex;
-      justify-content: center;
+      text-align: center;
       text-transform: uppercase;
   }
 

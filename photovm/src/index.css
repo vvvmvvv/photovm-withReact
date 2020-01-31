@@ -12,10 +12,18 @@ body,html{
 }
 
 .container{
-  max-width: 1170px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 0 15px;
   
+}
+
+.main-wrapper{
+  margin: 30px 5px;   
+  background-color: whitesmoke;
+  border-radius: 8px;
+  padding: 10px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 .processing{

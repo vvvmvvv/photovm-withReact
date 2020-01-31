@@ -120,7 +120,7 @@ const Photo = (props) => {
 
     let updateForm;
     if(editMode){
-        deleteButton = <button className="delete" onClick={(e) => deleteCurrentPhoto()}>Delete Photo</button>
+        deleteButton = <button className="delete" onClick={(e) => deleteCurrentPhoto()}><i className="far fa-trash-alt"></i> Delete Photo</button>
 
         if(isBusy){
             updateForm = (
@@ -132,8 +132,7 @@ const Photo = (props) => {
         }else{
             updateForm = (
                 <React.Fragment>
-                <form className="editForm" onSubmit={updateCurrentPhoto}>
-                        <p>&nbsp;&gt;&nbsp;Update the current photo&nbsp;&lt;&nbsp;</p>
+                <form className="editForm" onSubmit={updateCurrentPhoto} enctype="multipart/form-data" method="post">
 
                             <label htmlFor="title">Photo title:</label>
                             <input type="text" name="title" ref={titleRef}  defaultValue={photo.title} />
@@ -142,9 +141,9 @@ const Photo = (props) => {
                             <textarea name="description" ref={descriptionRef}  defaultValue={photo.description}></textarea>
                             
                             <label htmlFor="photography">Change photography:</label>
-                            <input type="file" ref={fileRef}/>
+                            <input accept="image/*" type="file" ref={fileRef}/>
                             <hr/>
-                            <input type="submit" value="Update photo"/>
+                            <button className="edit-btn" type="submit"><i class="fas fa-edit"></i>Update photo</button>
                 </form>
             
                 {deleteButton}
@@ -163,26 +162,28 @@ const Photo = (props) => {
     }else{
 
         if(userState.email === photo.author){
-            editButton = <button className="edit" onClick={(e) => toggleEditMode()}>Edit Photo </button>;
+            editButton = <button className="edit" onClick={(e) => toggleEditMode()}><i className="fas fa-edit"></i> Edit Photo </button>;
         }
 
         currentPhoto = (
             <div className="container">
-            <div className="single">
-                <h2 className="single-title">Title: {photo.title}</h2>
-                <img src={photo.photography} alt="photography"/>
-                <div className="single-all">
-                    <div className="single__info">
-                            <div className="single__info-description"><span className="description">Description: <br/></span> {photo.description}</div>
-                            <div className="single__info-author"><span className="author">Author:</span> {photo.author}</div>
-                    </div>
-                    <div className="single-like">
-                <Like photo={photo} photoid={photoid}></Like>
+                <div className="main-wrapper">
+                    <div className="single">
+                        <h2 className="single-title"><i className="fas fa-image"></i> {photo.title}</h2>
+                        <img src={photo.photography} alt="photography"/>
+                        <div className="single-all">
+                            <div className="single__info">
+                                    <div className="single__info-description"><span className="description">Description: <br/></span> {photo.description}</div>
+                                    <div className="single__info-author"><span className="author"><i className="fas fa-user"></i> Author:</span> {photo.author}</div>
+                            </div>
+                            <div className="single-like">
+                        <Like photo={photo} photoid={photoid}></Like>
+                            </div>
+                        </div>
+                        {editButton}
+                        {updateForm}
                     </div>
                 </div>
-                {editButton}
-                {updateForm}
-            </div>
             </div>
         )
     }

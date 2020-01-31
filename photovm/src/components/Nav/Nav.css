@@ -3,6 +3,9 @@ nav{
     background-color: black;
     color: white;
 }
+.logo{
+    padding-top: 5px;
+}
 
 .menu {
     display: flex;
