@@ -10,6 +10,7 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [routeRedirect, setRouteRedirect] = useState(false);
+    const [error, setError] = useState('');
     const {dispatch} = React.useContext(Auth);
 
     const signin = async(e) => {
@@ -17,9 +18,8 @@ const Signin = () => {
         
         let response = await firebase.signin(email, password);
         if(response.hasOwnProperty('message')){
-            console.log(response.message);
+            setError(response.message);
         }else{
-            console.log(response.user);
             setRouteRedirect(true);
             return dispatch({
                 type: 'SIGNIN',
@@ -46,7 +46,7 @@ const Signin = () => {
                 <input required type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <button className="signin-form__btn" type='submit'>Create account</button>
-
+                {error ? <span>{error}</span> : null}
             </form>
         </React.Fragment>
 

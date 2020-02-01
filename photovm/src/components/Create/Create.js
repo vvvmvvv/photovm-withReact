@@ -77,7 +77,7 @@ const Create = (props) =>{
         )
     }else{
         createForm = (
-            <form className="create-form" onSubmit={addPhoto} enctype="multipart/form-data" method="post" >
+            <form className="create-form" onSubmit={addPhoto} encType="multipart/form-data" method="post" >
                 <p className="create-form__header"><i className="far fa-folder-open"></i> Add New Photo</p>
 
                 <label htmlFor="title">Photo title:</label>

@@ -10,6 +10,7 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [routeRedirect, setRouteRedirect] = useState(false);
+    const [error, setError] = useState('');
 
     const {dispatch} = React.useContext(Auth);
 
@@ -17,7 +18,7 @@ const Login = () => {
         e.preventDefault();
         let response = await firebase.login(email, password);
         if(response.hasOwnProperty('message')){
-            console.log(response.message);
+            setError(response.message);
         }else{
             const {uid: id, email} = response.user;
             const user = {
@@ -53,6 +54,7 @@ const Login = () => {
                 <input required type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <button className="login-form__btn" type='submit'>Login</button>
+                {error ? <span>{error}</span> : null}
             </form>
             </div>
         </React.Fragment>

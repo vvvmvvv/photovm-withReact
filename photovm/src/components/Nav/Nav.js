@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import { Link, withRouter} from 'react-router-dom';
 
 import firebase from '../../firebase/config'
@@ -12,16 +12,21 @@ const Nav = (props) => {
     const [userState, setUserState] = useState(null);
     const [userEmail, setUserEmail] = useState("");
 
+    const burgerEl = useRef(null);
 
     const {state, dispatch} = React.useContext(Auth);
 
-    useEffect(() => {
+    useEffect((prevProps = {}) => {
         firebase.getUserState().then(user =>{
             if(user){
                 setUserState(user);
                 setUserEmail(user.email);
             }
         });
+
+        if (props.location !== prevProps.location) {
+            burgerEl.current.checked = false;
+        }
     });
 
     const logout = () =>{
@@ -53,7 +58,7 @@ const Nav = (props) => {
         <React.Fragment>
             <nav>
                 <div className="container">
-                    <input type="checkbox" id="check"/>
+                    <input ref={burgerEl} type="checkbox" id="check"/>
                     <label htmlFor="check" className="checkbtn">
                         <i className="fas fa-bars"></i>
                     </label>

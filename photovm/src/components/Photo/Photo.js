@@ -7,7 +7,7 @@ import "./Photo.css"
 
 
 const Photo = (props) => {
-
+    const [notFound, setNotFound] = useState(false);
     const [timer, setTimer] = useState(false);
     const [editMode, setEditMode] = useState(false);
     const [userState, setUserState] = useState(false);
@@ -23,13 +23,16 @@ const Photo = (props) => {
     const [routeRedirect, setRedirect] = useState('');
 
     const getPhoto = async(photoid) => {
-        const _photo = await firebase.getPhoto(photoid).catch(err => {
-            console.log(err);
-            return err;
-        });
+        try {
+            const _photo = await firebase.getPhoto(photoid);
 
-        setPhoto(_photo);
-        setTimer(false);
+            if (_photo) {
+                setPhoto(_photo);
+                setTimer(false);
+            }
+        } catch(err) {
+            setNotFound(true);
+        }
     }
 
     useEffect(() => {
@@ -93,8 +96,6 @@ const Photo = (props) => {
         });
       }   
       firebase.updatePhoto(d, photoid, _photo).then(() => {
-        console.log("photo updated");
-        
         getPhoto(photoid);
         toggleEditMode();
         setIsBusy(false);
@@ -132,7 +133,7 @@ const Photo = (props) => {
         }else{
             updateForm = (
                 <React.Fragment>
-                <form className="editForm" onSubmit={updateCurrentPhoto} enctype="multipart/form-data" method="post">
+                <form className="editForm" onSubmit={updateCurrentPhoto} encType="multipart/form-data" method="post">
 
                             <label htmlFor="title">Photo title:</label>
                             <input type="text" name="title" ref={titleRef}  defaultValue={photo.title} />
@@ -143,7 +144,7 @@ const Photo = (props) => {
                             <label htmlFor="photography">Change photography:</label>
                             <input accept="image/*" type="file" ref={fileRef}/>
                             <hr/>
-                            <button className="edit-btn" type="submit"><i class="fas fa-edit"></i>Update photo</button>
+                            <button className="edit-btn" type="submit"><i className="fas fa-edit"></i>Update photo</button>
                 </form>
             
                 {deleteButton}
@@ -189,7 +190,8 @@ const Photo = (props) => {
     }
 
     return(
-        <React.Fragment>  
+        <React.Fragment>
+            {notFound ? <Redirect to="/error404" /> : null}
             {currentPhoto}
         </React.Fragment>
     );

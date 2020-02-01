@@ -58,21 +58,33 @@ class Firebase {
     //-------------------------------------------------------------------------------
 
     async getPhotos() {
-        let photosArray = [];
-        const photos = await firebase.firestore().collection('Photos').orderBy('date', 'desc').get();
-        photos.forEach(doc => {
-            photosArray.push({
-                id: doc.id,
-                data: doc.data()
-            });
-        });
-        return photosArray;
+        try {
+            let photosArray = [];
+            const photos = await firebase.firestore().collection('Photos').orderBy('date', 'desc').get();
+                photos.forEach(doc => {
+                    photosArray.push({
+                        id: doc.id,
+                        data: doc.data()
+                    });
+                });
+            return photosArray;
+        } catch(err) {
+            throw new Error(err.message);
+        }
     }
 
     async getPhoto(photoid) {
-        const photo = await firebase.firestore().collection('Photos').doc(photoid).get();
-        const photoData = photo.data();
-        return photoData;
+        try {
+            const photo = await firebase.firestore().collection('Photos').doc(photoid).get();
+            
+            if (photo.data()) {
+                const photoData = photo.data();
+                return photoData;
+            }
+            throw new Error('Not found');
+        } catch (err) {
+            throw err;
+        }
     }
 
     async getPhotosLength() {
@@ -132,21 +144,15 @@ class Firebase {
         }
     }
 
-    async updatePhotoLikes(photoid, newLikesData) {
-        await firebase.firestore().collection('Photos').doc(photoid).update(newLikesData)
+    updatePhotoLikes(photoid, newLikesData) {
+        firebase.firestore().collection('Photos').doc(photoid).update(newLikesData)
             .catch(console.log);
     }
 
-    async deletePhoto(photoid, fileref) {
-        const storageRef = firebase.storage().ref();
-        await storageRef.child(fileref).delete().catch(err => {
-            console.log(err);
-        });
-        console.log("Image Deleted");
+    async deletePhoto(photoid) {
         const photo = await firebase.firestore().collection("Photos").doc(photoid).delete().catch(err => {
             console.log(err);
         });
-        console.log("Photo Deleted");
 
         return photo;
 

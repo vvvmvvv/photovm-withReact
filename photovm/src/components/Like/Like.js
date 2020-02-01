@@ -8,17 +8,17 @@ const Like = ({photo, photoid}) => {
     const [likesCount, setLikesCount] = useState(0);
     const [likesArray, setLikesArray] = useState([]);
 
-    useEffect(() => {        
-        firebase.getUserState().then(user =>{
-            if(user){
-                const {uid: id, email} = user;
-                setCurrentUser({id, email});
-            }
-        });
-
+    useEffect(() => {
         if (photo) {
             setLikesArray(photo.likes);
             setLikesCount(photo.likes.length);
+            
+            firebase.getUserState().then(user =>{
+                if(user){
+                    const {uid: id, email} = user;
+                    setCurrentUser({id, email});
+                }
+            });
         }
     }, []);
 
@@ -26,18 +26,21 @@ const Like = ({photo, photoid}) => {
         setLikesCount(likesArray.length);
     }, [likesArray]);
 
-    const likeHandler = async () => {
-        const isUserLiked = likesArray.includes(currentUser.email);
-        if (isUserLiked) {
+    const likeHandler = (e) => {
+        if (isUserLiked()) {
             const updatedArray = likesArray.filter((likedUser) => likedUser !== currentUser.email);
-            await firebase.updatePhotoLikes(photoid, {likes: updatedArray});
+            firebase.updatePhotoLikes(photoid, {likes: updatedArray});
             setLikesArray(updatedArray);
         } else {
             const updatedArray = [...likesArray, currentUser.email];
-            await firebase.updatePhotoLikes(photoid, {likes: updatedArray});
+            firebase.updatePhotoLikes(photoid, {likes: updatedArray});
             setLikesArray(updatedArray);
         }
     };
+
+    const isUserLiked = () => {
+        return likesArray.includes(currentUser.email);
+    }
 
     const likeButton = () => {
         if (currentUser) {
@@ -46,7 +49,7 @@ const Like = ({photo, photoid}) => {
                     
                     <div className="row-like__click">
                     <label className="like">
-                    <input onClick={likeHandler} type="checkbox" className="like__button"/>
+                    <input onClick={likeHandler} defaultChecked={isUserLiked()} type="checkbox" className="like__button"/>
                     <span className="like__heart"></span>
                     </label>
                     </div>

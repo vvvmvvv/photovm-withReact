@@ -167,12 +167,7 @@ nav ul li .a {
         padding: 5px 50px;
     }
 
-
     #check:checked~ul {
-        left: 0;
-    }
-
-    nav ul li a:checked~ul {
         left: 0;
     }
 }

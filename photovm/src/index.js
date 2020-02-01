@@ -5,9 +5,9 @@ import './index.css';
 import {AuthProvider} from './context/authContext';
 import {BrowserRouter} from 'react-router-dom';
 import {PhotosProvider} from './context/photosContext'
-
-
-
+import 'react-app-polyfill/ie11';
+import 'react-app-polyfill/stable';
+import 'core-js/stable';
 
 ReactDOM.render(
     <BrowserRouter>

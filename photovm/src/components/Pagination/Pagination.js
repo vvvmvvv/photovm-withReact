@@ -60,6 +60,12 @@ const Pagination = ({search, render, sort, filter}) => {
             });
         }
 
+        if (filter === 'notMyPhotos') {
+            newArray = [...newArray].filter(({data: photo}) => {
+                return photo.author !== user.email
+                });
+        }
+
         if (sort === 'date') {
             newArray = [...newArray].sort((a, b) => b.data.date - a.data.date);
         }
@@ -88,10 +94,12 @@ const Pagination = ({search, render, sort, filter}) => {
     const getPhotos = async () => {
         const photos = await firebase.getPhotos();
         
-        setAllPhotos(photos);
-        setFilteredPhotos(photos);
-        setPagesCount(photos.length);
-        setIsLoading(false);
+        if (photos) {
+            setAllPhotos(photos);
+            setFilteredPhotos(photos);
+            setPagesCount(photos.length);
+            setIsLoading(false);
+        }
     }
 
     const setPagesCount = (arrayLength) => {

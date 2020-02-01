@@ -45,8 +45,8 @@ const Gallery = () => {
             <div className='photos'>
                 {state.photos.map(photo => {
                     return(
-                        <div className="photo-content">
-                        <div className='photo' key={photo.id}>
+                        <div className="photo-content" key={photo.id}>
+                        <div className='photo' >
                             <Link to={'photos/' + photo.id}>
                                 <p className="photo-title">{photo.data.title}</p>
                                 <div style={{backgroundImage: 'url(' + photo.data.photography + ')' }}/>
@@ -78,8 +78,9 @@ const Gallery = () => {
                     <div className="functions__filter">
                     <span><i className="fas fa-filter"></i> Filter by: </span>
                     <select defaultValue={filter} onChange={(e) => filterHandler(e.target.value)}>
-                        <option value="allPhotos">All Photos</option>
-                        <option value="myPhotos">My Photos</option>
+                        <option value="allPhotos">All photos</option>
+                        <option value="myPhotos">My photos</option>
+                        <option value="notMyPhotos">Not my photos</option>
                     </select>
                     </div>
                 </React.Fragment>

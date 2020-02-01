@@ -2,6 +2,7 @@ import React from 'react';
 
 import Routes from './routes'
 import Nav from './components/Nav/Nav'
+import Footer from './components/Footer/Footer'
 
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
           <main>
             <Routes/>
           </main>
+          <Footer/>
       </div>
     );
 }
