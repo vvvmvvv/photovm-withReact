@@ -2,7 +2,7 @@
     max-width: 900px;
     width: 80%;
     margin: 0px auto;
-    padding: 30px 40px;
+    padding: 20px 40px;
     border-radius: 8px;
     background-color: whitesmoke;
     color: black;
@@ -10,33 +10,31 @@
 
 .single>img {
     width: 100%;
-    
+
 }
 
 .single-all {
     margin: 20px 5px;
     display: flex;
     justify-content: space-around;
+
 }
 
 .single__info {
     display: flex;
     flex-direction: column;
-    max-width: 70%;
+    max-width: 800px;
 }
 
 .single__info-description {
-    display: flex;
-    flex-wrap: wrap;
     padding: 10px;
     max-width: 70%;
-    word-break: break-all;
 }
 
 .single__info-author {
     padding: 10px;
     width: 200px;
-    margin-top: 10px;
+    margin: 10px 10px;
 }
 
 .description {
@@ -49,18 +47,22 @@
     font-weight: bold;
 }
 
-.single-title{
+.single-title {
     text-align: center;
     margin-bottom: 20px;
 }
 
 
-.edit-btn{
+.edit-btn {
     cursor: pointer;
+    border: 2px solid orange;
+    border-radius: 10px;
+    background-color: whitesmoke;
 }
-.edit-btn:hover{
+
+.edit-btn:hover {
     background-color: orange;
-    color:black;
+    color: black;
 }
 
 .editForm {
@@ -71,12 +73,27 @@
     border: 1px solid black;
 }
 
-.edit{
-    background: orange;
+.edit {
+
+    background-color: black;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid black;
+    color: whitesmoke;
+    margin-top: 30px;
+}
+
+.edit:hover {
+    background-color: orange;
     padding: 10px;
     border: none;
+    color: black;
+    border: 2px solid whitesmoke;
     cursor: pointer;
+    border-radius: 10px;
 }
+
 .delete {
     text-align: end;
     background: none;
@@ -85,15 +102,19 @@
     cursor: pointer;
 }
 
-.edit {
-    border: 1px solid black;
-    color: black;
-    margin-top: 40px;
-}
-
-
 .delete {
     background: red;
     color: white;
-    margin-top: 100px;
+    margin: 50px 0px;
+}
+
+@media (max-width: 420px) {
+    .single-all {
+        flex-direction: column;
+    }
+
+    .single__info-description {
+        padding: 10px 0px;
+        max-width: 100%;
+    }
 }

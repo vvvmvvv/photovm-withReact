@@ -132,7 +132,7 @@ const Gallery = () => {
                                 </div>
                             <div className="functions__search">
                                         <label><i className="fas fa-search"></i> Search by photos: </label>
-                                        <input type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
+                                        <input className="functions__search-input" type="search" value={search} onChange={(e) => searchHandler(e.target.value)} id="photos-search" name="search"/>
                                     </div>
                             </div>
                             {addButton()}

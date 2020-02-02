@@ -17,9 +17,9 @@ const Main = () => {
                             <h1><i className="fas fa-angle-left"></i> PhotoVM <i className="fas fa-angle-right"></i></h1>
                             
                         </div>
-                        {/* <div className="main__info-line">
-                            <img src={line} alt="" height="100px" width="900px"/>
-                        </div> */}
+                        <div className="main__info-line">
+                            <img className="line-image"src={line} alt=""/>
+                        </div>
                         <div className="main__info-description">
                             <h3><i className="fas fa-caret-right"></i> Internet photo album, photo sharing service <i
                                     className="fas fa-caret-left"></i></h3>
@@ -29,10 +29,10 @@ const Main = () => {
                 <div className="wraper-slider">
                         <div className="slider">
                             <figure>
-                                <img src={s2} alt="" height="700px"/>
-                                <img src={s3} alt="" height="700px"/>
-                                <img src={s4} alt="" height="700px"/>
-                                <img src={s5} alt="" height="700px"/>
+                                <img src={s2} alt="" height="500px"/>
+                                <img src={s3} alt="" height="500px"/>
+                                <img src={s4} alt="" height="500px"/>
+                                <img src={s5} alt="" height="500px"/>
                             </figure>
                         </div>
                     </div>

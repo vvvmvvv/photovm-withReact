@@ -188,7 +188,7 @@ const Pagination = ({search, render, sort, filter}) => {
                 <div className="pagination">
                     <button onClick={firstPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}><i className="fas fa-angle-double-left"></i></button>
                     <button onClick={prevPageHandler} className={"pagination__carat " + (isCaratHidden('left') ? 'pagination__carat_hidden' : '')}><i className="fas fa-chevron-left"></i></button>
-                    <p className="pagination__text"><i className="fas fa-book-open"></i>&nbsp; Page {page} of {pageCount}</p>
+                    <p className="pagination__text"><i className="fas fa-book-open"></i><span className="pagiination__text-page">&nbsp; Page</span> {page} of {pageCount}</p>
                     <button onClick={nextPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}><i className="fas fa-chevron-right"></i></button>
                     <button onClick={lastPageHandler} className={"pagination__carat " + (isCaratHidden('right') ? 'pagination__carat_hidden' : '')}><i className="fas fa-angle-double-right"></i></button>
                 </div>

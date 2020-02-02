@@ -1,11 +1,142 @@
-.header-center{
+.header-center {
     display: flex;
     justify-content: center;
     padding: 20px 0;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-.about{
+.about {
     display: flex;
-    padding: 0px 20px;
+    margin: 20px 0px;
+    padding: 10px;
+}
+
+.map-wrapper {
+    margin: 0px 10px;
+    padding: 5px 10px;
+}
+
+.map {
+    height: 400px;
+    width: 400px;
+}
+
+
+.about__right-bottom {
+    margin: 30px;
+}
+
+.bottom-header {
+    text-align: center;
+}
+
+.bottom-icons {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.bottom-icons a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-size: 25px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+    margin: 0px 5px;
+}
+
+.facebook {
+    background-color: blue;
+    border: 4px solid whitesmoke;
+    border-radius: 50px;
+}
+
+.facebook:hover {
+    border: 4px solid blue;
+    border-radius: 20px;
+    transition: .5s linear;
+}
+
+.twitter {
+    background-color: deepskyblue;
+    border: 4px solid whitesmoke;
+    border-radius: 50px;
+}
+
+.twitter:hover {
+    border: 4px solid deepskyblue;
+    border-radius: 20px;
+    transition: .5s linear;
+}
+
+
+.linkedin {
+    background-color: dodgerblue;
+    border: 4px solid whitesmoke;
+}
+
+.linkedin:hover {
+    border: 4px solid dodgerblue;
+    border-radius: 20px;
+    transition: .5s linear;
+}
+
+.github {
+    background-color: black;
+    border: 4px solid whitesmoke;
+}
+
+.github:hover {
+    border: 4px solid black;
+    border-radius: 20px;
+    transition: .5s linear;
+}
+
+
+
+@media (max-width: 790px) {
+    .about {
+        flex-direction: column;
+    }
+
+    .map-wrapper {
+        margin: 5px 0px;
+        padding: 5px 0px;
+    }
+}
+
+@media (max-width: 485px) {
+    .about {
+        align-items: center;
+    }
+
+    .map {
+        width: 300px;
+        height: 300px;
+    }
+
+}
+
+@media (max-width: 359px) {
+    .map {
+        width: 250px;
+        height: 250px;
+    }
+
+    .bottom-icons a {
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        border-radius: 3px;
+        font-size: 22px;
+        color: #ffffff;
+        text-align: center;
+        line-height: 35px;
+        margin: 5px 2px;
+    }
+
+
 }

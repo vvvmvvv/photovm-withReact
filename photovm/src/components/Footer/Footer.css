@@ -1,27 +1,43 @@
-.row{
-    display: flex;
-    justify-content: center;
+.row {
+    text-align: center;
 }
 
 footer {
-    width: 100%;
-    position: fixed;    
+    position: fixed;
     bottom: 0;
-    padding: 10px;
-    line-height: 20 px;
-    font-size: 14px;
+    width: 100%;
+    padding: 10px 0px;
+    line-height: 20px;
+    font-size: 13px;
     background: black;
     color: white;
 }
-footer a{
-    padding: 0 15px;
+
+footer a {
+    padding: 5px 15px;
+    margin: 0 20px;
     text-decoration: none;
     color: cadetblue;
 }
 
-footer a:hover{
+footer a:hover {
     color: black;
     background-color: white;
     border-radius: 25px;
+}
 
+@media (max-width: 470px) {
+    .footer-text {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 410px) {
+    .footer-text {
+        font-size: 12px;
+    }
+
+    .footer-text-third {
+        display: block;
+    }
 }

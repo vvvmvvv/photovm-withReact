@@ -71,7 +71,7 @@ const Create = (props) =>{
     if(isBusy){
         createForm = (
                     <div className="processing">
-                        <p>Request in procces <span className="process">{loading}%</span></p>
+                        <p>Adding photo.. <span className="process">{loading}%</span></p>
                         <div className="loader">Loading...</div>
                     </div>
         )
@@ -81,15 +81,15 @@ const Create = (props) =>{
                 <p className="create-form__header"><i className="far fa-folder-open"></i> Add New Photo</p>
 
                 <label htmlFor="title">Photo title:</label>
-                <input type="text" name="title" value={title} required onChange={(e) => setTitle(e.target.value)}/>
+                <input type="text" maxLength='30' name="title" value={title} required onChange={(e) => setTitle(e.target.value)}/>
 
                 <label htmlFor="description">Photo description:</label>
-                <textarea  required name="description" value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
+                <textarea  required name="description" maxLength='200' value={description} onChange={(e) => setDescription(e.target.value)}> </textarea>
 
                 <label htmlFor="photography">Choose photo:</label>
                 <input accept="image/*" type="file" required onChange={(e) => setPhotography(e.target.files)}/>
                 <hr/>
-                <button className="create-form__btn" type="submit"><i className="fas fa-upload"></i> Add Photo to Gallery </button>
+                <button className="create-form__btn" type="submit"><i className="fas fa-upload"></i> ADD to Gallery </button>
 
             </form>
         )

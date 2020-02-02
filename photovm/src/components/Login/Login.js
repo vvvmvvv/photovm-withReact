@@ -48,13 +48,13 @@ const Login = () => {
                 <h3 className="login-form__header"><i className="fas fa-sign-in-alt"></i> Login</h3>
 
                 <label htmlFor='email'><i className="fas fa-envelope-square"> Email:</i> </label>
-                <input required type='email' name='email' onChange={(e) => setEmail(e.target.value)} />
+                <input required type='email' maxLength="34" name='email' onChange={(e) => setEmail(e.target.value)} />
 
                 <label htmlFor='password'><i className="fas fa-lock"> Password:</i> </label>
                 <input required type='password' name='password' onChange={ (e) => setPassword(e.target.value) } />
                 <hr/>
                 <button className="login-form__btn" type='submit'>Login</button>
-                {error ? <span>{error}</span> : null}
+                {error ? <span class="alert-error"><i class="fas fa-angle-right"> {error}</i> </span> : null}
             </form>
             </div>
         </React.Fragment>

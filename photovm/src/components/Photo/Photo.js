@@ -126,7 +126,7 @@ const Photo = (props) => {
         if(isBusy){
             updateForm = (
                     <div className="processing">
-                        <p>Request is being processed <span className="process">{loading}%</span></p>
+                        <p>Photo updating <span className="process">{loading}%</span></p>
                         <div className="loader">Loading...</div>
                     </div>
             )
@@ -136,15 +136,15 @@ const Photo = (props) => {
                 <form className="editForm" onSubmit={updateCurrentPhoto} encType="multipart/form-data" method="post">
 
                             <label htmlFor="title">Photo title:</label>
-                            <input type="text" name="title" ref={titleRef}  defaultValue={photo.title} />
+                            <input type="text"  maxLength='30' name="title" ref={titleRef}  defaultValue={photo.title} />
 
                             <label htmlFor="description">Photo description:</label>
-                            <textarea name="description" ref={descriptionRef}  defaultValue={photo.description}></textarea>
+                            <textarea name="description"  maxLength='200' ref={descriptionRef}  defaultValue={photo.description}></textarea>
                             
                             <label htmlFor="photography">Change photography:</label>
                             <input accept="image/*" type="file" ref={fileRef}/>
                             <hr/>
-                            <button className="edit-btn" type="submit"><i className="fas fa-edit"></i>Update photo</button>
+                            <button className="edit-btn" type="submit"><i className="fas fa-edit"></i>Update Photo</button>
                 </form>
             
                 {deleteButton}
