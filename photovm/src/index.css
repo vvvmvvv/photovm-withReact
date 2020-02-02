@@ -45,6 +45,11 @@ body,html{
   padding: 8px 0px;
 }
 
+textarea {
+  resize: vertical; 
+}
+
+
 .loader,
 .loader::before,
 .loader::after{

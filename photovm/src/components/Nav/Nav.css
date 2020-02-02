@@ -152,7 +152,7 @@ nav ul li .a {
 
     nav ul li {
         display: block;
-        margin: 10px 0;
+        margin: 5px 0;
         line-height: 20px;
     }
 
@@ -164,6 +164,7 @@ nav ul li .a {
         border-radius: 7px;
         margin: 0px 0px;
         padding: 5px 50px;
+        font-size: 12px;
     }
 
     .signin {
@@ -171,6 +172,7 @@ nav ul li .a {
         margin: 0px 10px;
         text-transform: uppercase;
         padding: 5px 50px;
+        font-size: 12px;
     }
 
     #check:checked~ul {
