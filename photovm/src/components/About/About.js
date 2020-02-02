@@ -29,9 +29,9 @@ const About = () => {
                                     </div>
                                     <div className="bottom-icons">
                                         <a className="facebook" href="https://www.facebook.com/vladimir.mikulin.92"><i className="fab fa-facebook"></i></a>
-                                        <a className="twitter"to="https://twitter.com/?lang=ru"><i className="fab fa-twitter"></i></a>
-                                        <a className="linkedin" to="https://www.linkedin.com/in/vladimir-mikulin-54a670188/"><i className="fab fa-linkedin"></i></a>
-                                        <a className="github" to="https://github.com/vvvmvvv"><i className="fab fa-github"></i></a>
+                                        <a className="twitter"href="https://twitter.com/?lang=ru"><i className="fab fa-twitter"></i></a>
+                                        <a className="linkedin" href="https://www.linkedin.com/in/vladimir-mikulin-54a670188/"><i className="fab fa-linkedin"></i></a>
+                                        <a className="github" href="https://github.com/vvvmvvv"><i className="fab fa-github"></i></a>
                                     </div>
                             </div>
                             
